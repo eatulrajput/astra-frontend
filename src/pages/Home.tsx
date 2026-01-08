@@ -95,23 +95,14 @@ const data = [
     content: (
       <div>
         <p className="mb-4 text-xs font-normal text-neutral-800 md:text-2xl dark:text-neutral-200">
-          Deployed 5 new components on Aceternity today
+          Selection of project topic and planning
         </p>
         <div className="mb-8">
           <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-2xl dark:text-neutral-300">
-            ✅ Card grid component
+            1. Team Plan
           </div>
           <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-2xl dark:text-neutral-300">
-            ✅ Startup template Aceternity
-          </div>
-          <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-2xl dark:text-neutral-300">
-            ✅ Random file upload lol
-          </div>
-          <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-2xl dark:text-neutral-300">
-            ✅ Himesh Reshammiya Music CD
-          </div>
-          <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-2xl dark:text-neutral-300">
-            ✅ Salman Bhai Fan Club registrations open
+            2. Mentor Approval
           </div>
         </div>
         {/* <div className="grid grid-cols-2 gap-4">
@@ -190,7 +181,7 @@ export const Home = () => {
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="mt-8 min-h-screen bg-linear-to-br from-slate-700 to-slate-500 dark:from-slate-300 dark:to-slate-500 bg-clip-text py-20 text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+          className="mt-8 min-h-screen bg-linear-to-br from-slate-700 to-slate-500 bg-clip-text py-20 text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl dark:from-slate-300 dark:to-slate-500"
         >
           Hi, I am Astra <br /> Welcome Home.
         </motion.h1>
@@ -211,7 +202,7 @@ export const Home = () => {
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="mx-auto mt-20 flex min-h-[50vh] items-center justify-center bg-linear-to-br from-slate-700 to-slate-500 dark:from-slate-300 dark:to-slate-500 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+          className="mx-auto mt-20 flex min-h-[50vh] items-center justify-center bg-linear-to-br from-slate-700 to-slate-500 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl dark:from-slate-300 dark:to-slate-500"
         >
           <p className="text-4xl">Features</p>
         </motion.h1>
@@ -278,7 +269,7 @@ export const Home = () => {
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="mx-auto mt-20 flex min-h-[50vh] items-center justify-center bg-linear-to-br from-slate-700 to-slate-500 dark:from-slate-300 dark:to-slate-500 bg-clip-text py-4 text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+          className="mx-auto mt-20 flex min-h-[50vh] items-center justify-center bg-linear-to-br from-slate-700 to-slate-500 bg-clip-text py-4 text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl dark:from-slate-300 dark:to-slate-500"
         >
           <p className="text-4xl">Testimonials</p>
         </motion.h1>

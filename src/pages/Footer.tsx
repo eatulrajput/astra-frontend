@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "motion/react";
 import { TransitionLink } from "../components/TransitionLink";
 import { IconPrompt } from "@tabler/icons-react";
