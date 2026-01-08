@@ -1,4 +1,3 @@
-import React from "react";
 import { AnimatedTooltip } from "../components/ui/animated-tooltip";
 import { Container } from "../components/Container";
 import { motion } from "motion/react";
