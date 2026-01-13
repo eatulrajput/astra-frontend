@@ -1,10 +1,15 @@
-import { IconPrompt } from "@tabler/icons-react";
+import { IconPrompt, IconMenu2, IconX } from "@tabler/icons-react";
 import { TransitionLink } from "./TransitionLink";
 import ThemeToggleButton from "./ThemeToggleButton";
+import { useState} from "react";
+import { AnimatePresence, motion } from "motion/react";
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
+
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-neutral-100/30 dark:border-white/10 backdrop-blur-md">
+    <nav className="sticky top-0 z-50 w-full border-b border-neutral-100/30 backdrop-blur-md dark:border-white/10">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 text-white">
         {/* Logo */}
         <TransitionLink to="/">
@@ -23,8 +28,41 @@ export default function Navbar() {
           </div>
         </TransitionLink>
 
-        {/* Nav links */}
-        <div className="flex items-center gap-6 text-sm font-medium">
+        {/* Mobile menu button */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="ease-incursor-pointer text-neutral-700 duration-700 md:hidden dark:text-neutral-200"
+          aria-label="Toggle menu"
+        >
+          <AnimatePresence mode="popLayout">
+            {open ? (
+              <motion.div
+                key="close"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="absolute, inset-0"
+              >
+                <IconX size={28} />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="menu"
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="absolute, inset-1"
+              >
+                <IconMenu2 size={28} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </button>
+
+        {/* Nav links - desktop view */}
+        <div className="hidden items-center gap-6 text-sm font-medium md:flex">
           <TransitionLink
             className="text-neutral-600 transition duration-300 ease-in-out hover:text-black dark:hover:text-white"
             to="/"
@@ -55,18 +93,61 @@ export default function Navbar() {
           <div className="ml-4 flex items-center gap-4">
             <TransitionLink
               to="/login"
-              className="rounded-md border border-neutral-100/20 bg-black px-4 py-2 text-white hover:text-white/80  transition dark:hover:bg-neutral-900"
+              className="rounded-md border border-neutral-100/20 bg-black px-4 py-2 text-white transition hover:text-white/80 dark:hover:bg-neutral-900"
             >
               Login
             </TransitionLink>
 
             <TransitionLink
               to="/signup"
-              className="rounded-md bg-white px-4 py-2 text-black transition hover:bg-neutral-200 border"
+              className="rounded-md border bg-white px-4 py-2 text-black transition hover:bg-neutral-200"
             >
               Sign Up
             </TransitionLink>
 
+            {/* Dark Mode Button */}
+            <ThemeToggleButton />
+          </div>
+        </div>
+      </div>
+
+
+      {/* Nav links - mobile view */}
+
+
+      <div
+        className={`overflow-hidden transition duration-700 ease-in md:hidden ${open ? "max-h-screen opacity-100" : "max-h-0 opacity-0"}`}
+      >
+        <div className="flex flex-col gap-6 px-6 pt-4 pb-6 text-sm font-medium">
+          <TransitionLink onClick={() => setOpen(false)} to="/">
+            Home
+          </TransitionLink>
+          <TransitionLink onClick={() => setOpen(false)} to="/chat">
+            Chat
+          </TransitionLink>
+          <TransitionLink onClick={() => setOpen(false)} to="/scraper">
+            Scraper
+          </TransitionLink>
+          <TransitionLink onClick={() => setOpen(false)} to="/contact">
+            Contact
+          </TransitionLink>
+
+          <div className="flex gap-4 pt-4">
+            <TransitionLink
+              onClick={() => setOpen(false)}
+              className="rounded-md border border-neutral-100/20 bg-black px-4 py-2 text-white transition hover:text-white/80 dark:hover:bg-neutral-900"
+              to="/login"
+            >
+              Login
+            </TransitionLink>
+
+            <TransitionLink
+              onClick={() => setOpen(false)}
+              className="rounded-md border bg-white px-4 py-2 text-black transition hover:bg-neutral-200"
+              to="/sign up"
+            >
+              Sign Up
+            </TransitionLink>
             {/* Dark Mode Button */}
             <ThemeToggleButton />
           </div>
