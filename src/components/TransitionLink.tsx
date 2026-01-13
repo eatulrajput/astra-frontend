@@ -1,12 +1,11 @@
-import { type ReactNode, type  MouseEvent } from "react";
+import { type ReactNode, type MouseEvent } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 type TransitionLinkProps = {
   to: string;
   children: ReactNode;
-  className?:
-    | string
-    | ((props: { isActive: boolean }) => string);
+  className?: string | ((props: { isActive: boolean }) => string);
+  onClick?: () => void;
 };
 
 export const TransitionLink = ({
@@ -34,13 +33,11 @@ export const TransitionLink = ({
   };
 
   const resolvedClassName =
-    typeof className === "function"
-      ? className({ isActive })
-      : className;
+    typeof className === "function" ? className({ isActive }) : className;
 
   return (
     <a href={to} onClick={handleClick} className={resolvedClassName}>
       {children}
     </a>
   );
-}
+};
