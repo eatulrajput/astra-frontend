@@ -1,44 +1,48 @@
 import { Toaster } from "sonner";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import { Home } from "./pages/Home";
-import { Contact } from "./pages/Contact";
-import { Chat } from "./pages/Chat";
-import { Login } from "./auth/Login";
-import { Signup } from "./auth/Signup";
-import { Scraper } from "./pages/Scraper";
-// import { useEffect } from "react";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
+import Layout from "@/components/Layout.tsx";
+import { Home, Chat, Contact, Login, NotFound, Signup, Scraper } from "@/pages";
 import Lenis from "lenis";
-import { NotFound } from "./pages/NotFound";
 
 function App() {
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Layout />}>
+        <Route path="" element={<Home />} />
+        <Route path="/chat" element={<Chat />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/scraper" element={<Scraper />} />
+      </Route>,
+    ),
+  );
 
+  // Using Lenis for smooth slow scrolling
+  const lenis = new Lenis({
+    duration: 1.4, // higher = slower scroll
+    smoothWheel: true, // smooth mouse wheel
+    lerp: 0.1, // lower = smoother / slower
+  });
 
-// Using Lenis for smooth slow scrolling
-const lenis = new Lenis({
-  duration: 1.4,       // higher = slower scroll
-  smoothWheel: true,   // smooth mouse wheel
-  lerp: 0.1,           // lower = smoother / slower
-});
+  function raf(time: number) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
 
-function raf(time: number) {
-  lenis.raf(time);
   requestAnimationFrame(raf);
-}
 
-requestAnimationFrame(raf);
-
-  return (
-    <div className="min-h-screen text-white max-w-500 mx-auto min-w-sm">
-      <BrowserRouter>
-        <div className="flex justify-end px-4">
-        </div>
-        <Navbar />
-        <Toaster
-          position="top-center"
-          toastOptions={{
-            classNames: {
-              toast: `
+  <Toaster
+    position="top-center"
+    toastOptions={{
+      classNames: {
+        toast: `
         bg-neutral-900 border border-white/10 text-white
         data-[type=success]:bg-emerald-500/10
         data-[type=success]:text-emerald-400
@@ -56,22 +60,15 @@ requestAnimationFrame(raf);
         data-[type=info]:text-blue-400
         data-[type=info]:border-blue-400/20
       `,
-            },
-          }}
-        />
+      },
+    }}
+  />;
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/scraper" element={<Scraper />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/404" element={<NotFound />} />
-
-        </Routes>
-      </BrowserRouter>
-    </div>
+  return (
+    <>
+      {/* Toaster  */}
+      <RouterProvider router={router} />
+    </>
   );
 }
 
