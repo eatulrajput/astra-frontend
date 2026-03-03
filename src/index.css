@@ -10,12 +10,6 @@
   background-color: var(--color-transparent);
 }
 
-.bg-mybackground{
-  background-image: url('https://images.unsplash.com/photo-1603201667141-5a2d4c673378');
-  filter: blur(100px);
-  z-index: -1;
-}
-
 /* Hide Scrollbar from website */
 ::-webkit-scrollbar {
   width: 0px;

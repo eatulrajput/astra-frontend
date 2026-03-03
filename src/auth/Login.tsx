@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Container } from "../components/Container";
-import { Footer } from "../pages/Footer";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -84,7 +83,7 @@ export const Login = () => {
             </button>
           </form>
 
-          <div className="mt-4 text-center text-lg text-slate-400 flex flex-wrap">
+          <div className="mt-4 flex flex-wrap text-center text-lg text-slate-400">
             <p>New here?&ensp;</p>
             <a
               href="/signup"
@@ -95,7 +94,6 @@ export const Login = () => {
           </div>
         </div>
       </Container>
-      <Footer />
     </div>
   );
 };

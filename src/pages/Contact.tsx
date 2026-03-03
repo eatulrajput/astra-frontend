@@ -1,10 +1,8 @@
-import { AnimatedTooltip } from "../components/ui/animated-tooltip";
-import { Container } from "../components/Container";
-import { motion } from "motion/react";
-import { LampContainer } from "../components/ui/lamp";
 import { useState, type FormEvent } from "react";
+import { motion } from "motion/react";
+import { Container } from "@/components/Container";
+import { AnimatedTooltip, LampContainer } from "@/components/ui";
 import { toast } from "sonner";
-import { Footer } from "./Footer";
 
 const people = [
   {
@@ -176,7 +174,6 @@ export const Contact = () => {
           </div>
         </div>
       </Container>
-      <Footer />
     </div>
   );
 };

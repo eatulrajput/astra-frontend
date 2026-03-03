@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Container } from "../components/Container";
-import { Footer } from "../pages/Footer";
 
 export const Signup = () => {
   const [username, setUsername] = useState("");
@@ -128,7 +127,6 @@ export const Signup = () => {
           </div>
         </div>
       </Container>
-      <Footer />
     </div>
   );
 };
