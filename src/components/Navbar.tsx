@@ -85,13 +85,6 @@ export default function Navbar() {
             Scraper
           </SmoothNavLink>
 
-          <SmoothNavLink
-            className={({ isActive }) =>
-              `transition duration-300 ease-in-out hover:text-black dark:hover:text-white ${isActive ? "text-emerald-300" : "text-neutral-600"}`}
-            to="/contact"
-          >
-            Contact
-          </SmoothNavLink>
 
           {/* Auth links */}
           <div className="ml-4 flex items-center gap-4">
@@ -129,9 +122,6 @@ export default function Navbar() {
           </SmoothNavLink>
           <SmoothNavLink onClick={() => setOpen(false)} to="/scraper">
             Scraper
-          </SmoothNavLink>
-          <SmoothNavLink onClick={() => setOpen(false)} to="/contact">
-            Contact
           </SmoothNavLink>
 
           <div className="flex gap-4 pt-4">
