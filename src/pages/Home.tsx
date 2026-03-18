@@ -5,82 +5,15 @@ import {
   Cover,
   Timeline,
   WobbleCard,
+  Contact
 } from "@/components/ui";
-import { Contact } from "../components/Contact";
+import { changelogData } from "@/data/changelogData";
+import { testimonialsData } from "@/data/testimonialsData";
 
-const data = [
-  {
-    title: "2026",
-    content: (
-      <div>
-        <p className="mb-8 text-xs font-normal text-neutral-800 md:text-2xl dark:text-neutral-200">
-          Built and launched Astra AI
-        </p>
-      </div>
-    ),
-  },
-  {
-    title: "2025",
-    content: (
-      <div>
-        <p className="mb-8 text-xs font-normal text-neutral-800 md:text-2xl dark:text-neutral-200">
-          Figuring Out
-        </p>
-        <p className="mb-8 text-xs font-normal text-neutral-800 md:text-2xl dark:text-neutral-200">
-          Lorem ipsum is for people who are too lazy to write copy. But we are
-          not. Here are some more example of beautiful designs I built.
-        </p>
-      </div>
-    ),
-  },
-  {
-    title: "Initial Days",
-    content: (
-      <div>
-        <p className="mb-4 text-xs font-normal text-neutral-800 md:text-2xl dark:text-neutral-200">
-          Selection of project topic and planning
-        </p>
-        <div className="mb-8">
-          <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-2xl dark:text-neutral-300">
-            1. Team Plan
-          </div>
-          <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-2xl dark:text-neutral-300">
-            2. Mentor Approval
-          </div>
-        </div>
-      </div>
-    ),
-  },
-];
 
-const testimonials = [
-  {
-    quote: "It is big contribution back to our College",
-    name: "Aritra",
-    designation: "Final Year Student, ECS Branch",
-    src: "/dev1.webp",
-  },
-  {
-    quote:
-      "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
-    name: "Arya Vats",
-    designation: "Final Year Student, ECS Branch",
-    src: "/dev2.webp",
-  },
-  {
-    quote:
-      "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
-    name: "Atul",
-    designation: "Final Year Student, ECS Branch",
-    src: "dev3.webp",
-  },
-  {
-    quote: "It is a Great Platform for juniors.",
-    name: "Harsh",
-    designation: "Final Year Student, ECS Branch",
-    src: "/dev4.webp",
-  },
-];
+
+
+
 
 export const Home = () => {
   return (
@@ -104,9 +37,9 @@ export const Home = () => {
           <img src="/illustrations/studying.svg" alt="" />
         </div>
 
-      <div className="mx-auto flex min-h-screen flex-col items-center justify-evenly">
+      <div className="mx-auto flex mt-80 flex-col items-center justify-evenly">
         <h1 className="relative z-20 mx-auto max-w-7xl bg-linear-to-b from-emerald-400 via-emerald-400 to-emerald-400 bg-clip-text text-center text-4xl font-semibold text-transparent md:text-4xl lg:text-6xl dark:from-white dark:via-white dark:to-white">
-          Strong AI Based Community Platform <br /> at <Cover>Astra</Cover>
+          You are engaging with a Strong AI Based Community Platform <br /> at <Cover>Astra</Cover>
         </h1>
       </div>
 
@@ -173,8 +106,9 @@ export const Home = () => {
         </div>
       </div>
 
+{/* Work Timeline */}
       <div className="relative w-full overflow-clip">
-        <Timeline data={data} />
+        <Timeline data={changelogData} />
       </div>
 
       <div className="min-h-screen">
@@ -190,8 +124,12 @@ export const Home = () => {
         >
           <p className="text-4xl">Testimonials</p>
         </motion.h1>
-        <AnimatedTestimonials testimonials={testimonials} />
+
+        {/* Testimonials */}
+        <AnimatedTestimonials testimonials={testimonialsData} />
       </div>
+
+      {/* Contact */}
      <section id="contact">
       <Contact/>
       </section>
