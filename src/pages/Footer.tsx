@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { SmoothNavLink } from "../components/SmoothNavLink";
-import { IconPrompt } from "@tabler/icons-react";
+import { IconBrandGithub, IconPrompt, IconSettings, IconSettingsAi } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
@@ -27,15 +28,12 @@ export const Footer = () => {
           {/* Links */}
           <div className="flex flex-col gap-3 text-sm text-slate-400">
             <p className="font-medium text-slate-200">Product</p>
-            <SmoothNavLink to="/features" className="hover:text-emerald-300 transition">
-              Features
+            <SmoothNavLink to="/features" className="hover:text-emerald-300 transition flex gap-2">
+              <IconSettings className="size-4"/> Features
             </SmoothNavLink>
-            <SmoothNavLink to="/pricing" className="hover:text-emerald-300 transition">
-              Pricing
-            </SmoothNavLink>
-            <SmoothNavLink to="/docs" className="hover:text-emerald-300 transition">
-              Docs
-            </SmoothNavLink>
+            <Link target="_blank" to="https://github.com/eatulrajput/astra-frontend" className="hover:text-emerald-300 transition flex gap-2">
+              <IconBrandGithub className="size-4" /> GitHub
+            </Link>
           </div>
 
           {/* Meta */}

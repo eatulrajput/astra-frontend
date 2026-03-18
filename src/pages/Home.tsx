@@ -6,6 +6,7 @@ import {
   Timeline,
   WobbleCard,
 } from "@/components/ui";
+import { Contact } from "../components/Contact";
 
 const data = [
   {
@@ -93,11 +94,15 @@ export const Home = () => {
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="mt-8 min-h-screen bg-linear-to-br from-slate-700 to-slate-500 bg-clip-text py-20 text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl dark:from-slate-300 dark:to-slate-500"
+          className="mt-8 bg-linear-to-br from-slate-700 to-slate-500 bg-clip-text py-20 text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl dark:from-slate-300 dark:to-slate-500"
         >
           Hi, I am Astra <br /> Welcome Home.
         </motion.h1>
+        
       </div>
+      <div>
+          <img src="/illustrations/studying.svg" alt="" />
+        </div>
 
       <div className="mx-auto flex min-h-screen flex-col items-center justify-evenly">
         <h1 className="relative z-20 mx-auto max-w-7xl bg-linear-to-b from-emerald-400 via-emerald-400 to-emerald-400 bg-clip-text text-center text-4xl font-semibold text-transparent md:text-4xl lg:text-6xl dark:from-white dark:via-white dark:to-white">
@@ -187,6 +192,9 @@ export const Home = () => {
         </motion.h1>
         <AnimatedTestimonials testimonials={testimonials} />
       </div>
+     <section id="contact">
+      <Contact/>
+      </section>
     </div>
   );
 };
