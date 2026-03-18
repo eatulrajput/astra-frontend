@@ -5,15 +5,10 @@ import {
   Cover,
   Timeline,
   WobbleCard,
-  Contact
+  Contact,
 } from "@/components/ui";
 import { changelogData } from "@/data/changelogData";
 import { testimonialsData } from "@/data/testimonialsData";
-
-
-
-
-
 
 export const Home = () => {
   return (
@@ -31,15 +26,15 @@ export const Home = () => {
         >
           Hi, I am Astra <br /> Welcome Home.
         </motion.h1>
-        
       </div>
       <div>
-          <img src="/illustrations/studying.svg" alt="" />
-        </div>
+        <img src="/illustrations/studying.svg" alt="" />
+      </div>
 
-      <div className="mx-auto flex mt-80 flex-col items-center justify-evenly">
+      <div className="mx-auto mt-80 flex flex-col items-center justify-evenly">
         <h1 className="relative z-20 mx-auto max-w-7xl bg-linear-to-b from-emerald-400 via-emerald-400 to-emerald-400 bg-clip-text text-center text-4xl font-semibold text-transparent md:text-4xl lg:text-6xl dark:from-white dark:via-white dark:to-white">
-          You are engaging with a Strong AI Based Community Platform <br /> at <Cover>Astra</Cover>
+          You are engaging with a Strong AI Based Community Platform <br /> at{" "}
+          <Cover>Astra</Cover>
         </h1>
       </div>
 
@@ -82,7 +77,7 @@ export const Home = () => {
             <h2 className="max-w-80 text-left text-base font-semibold tracking-[-0.015em] text-balance text-white md:text-xl lg:text-3xl">
               No need to use Ask Seniors Anymore.
             </h2>
-            <p className="mt-4 max-w-[26rem] text-left text-base/6 text-neutral-200">
+            <p className="mt-4 max-w-104 text-left text-base/6 text-neutral-200">
               Just Sign Up with College Email and Experience.
             </p>
           </WobbleCard>
@@ -91,7 +86,7 @@ export const Home = () => {
               <h2 className="max-w-sm text-left text-base font-semibold tracking-[-0.015em] text-balance text-white md:max-w-lg md:text-xl lg:text-3xl">
                 Signup for free and Join Astra AI Community today!
               </h2>
-              <p className="mt-4 max-w-[26rem] text-left text-base/6 text-neutral-200">
+              <p className="mt-4 max-w-104 text-left text-base/6 text-neutral-200">
                 The One and Only Solution for Students and Professors.
               </p>
             </div>
@@ -106,7 +101,7 @@ export const Home = () => {
         </div>
       </div>
 
-{/* Work Timeline */}
+      {/* Work Timeline */}
       <div className="relative w-full overflow-clip">
         <Timeline data={changelogData} />
       </div>
@@ -130,8 +125,8 @@ export const Home = () => {
       </div>
 
       {/* Contact */}
-     <section id="contact">
-      <Contact/>
+      <section id="contact">
+        <Contact />
       </section>
     </div>
   );
