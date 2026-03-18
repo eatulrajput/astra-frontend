@@ -1,37 +1,18 @@
 import { Toaster } from "sonner";
-import { useEffect } from "react";
 import {
-  useLocation,
   Route,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
 import Layout from "@/components/Layout.tsx";
-import { Home, Chat, Contact, Dashboard, Login, NotFound, Signup, Scraper } from "@/pages";
+import { Home, Chat, Dashboard, Login, NotFound, Signup, Scraper } from "@/pages";
 import Lenis from "lenis";
 
-export function ScrollToHash() {
-  const { hash } = useLocation();
-
-  useEffect(() => {
-    if (hash) {
-      const el = document.querySelector(hash);
-      if (el) {
-        setTimeout(() => {
-          el.scrollIntoView({ behavior: "smooth" });
-        }, 0);
-      }
-    }
-  }, [hash]);
-
-  return null;
-}
 
 
 
 function App() {
-  <ScrollToHash/>
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
