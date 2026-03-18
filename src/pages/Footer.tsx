@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { SmoothNavLink } from "../components/SmoothNavLink";
-import { IconBrandGithub, IconPrompt, IconSettings, IconSettingsAi } from "@tabler/icons-react";
+import { IconBrandGithub, IconPrompt, IconSettings} from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
