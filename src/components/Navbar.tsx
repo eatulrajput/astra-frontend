@@ -3,6 +3,7 @@ import { SmoothNavLink } from "./SmoothNavLink";
 import ThemeToggleButton from "./ThemeToggleButton";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -70,25 +71,38 @@ export default function Navbar() {
           >
             Home
           </SmoothNavLink>
-          <SmoothNavLink
-            className={({ isActive }) =>
-              `transition duration-300 ease-in-out hover:text-black dark:hover:text-white ${isActive ? "text-emerald-300" : "text-neutral-600"}`}
-            to="/chat"
-          >
-            Chat
-          </SmoothNavLink>
-          <SmoothNavLink
-            className={({ isActive }) =>
-              `transition duration-300 ease-in-out hover:text-black dark:hover:text-white ${isActive ? "text-emerald-300" : "text-neutral-600"}`}
-            to="scraper"
-          >
-            Scraper
-          </SmoothNavLink>
 
+          <Show when={"signed-in"}>
+            <SmoothNavLink
+              className={({ isActive }) =>
+                `transition duration-300 ease-in-out hover:text-black dark:hover:text-white ${isActive ? "text-emerald-300" : "text-neutral-600"}`
+              }
+              to="/chat"
+            >
+              Chat
+            </SmoothNavLink>
 
+            <SmoothNavLink
+              className={({ isActive }) =>
+                `transition duration-300 ease-in-out hover:text-black dark:hover:text-white ${isActive ? "text-emerald-300" : "text-neutral-600"}`
+              }
+              to="dashboard"
+            >
+              Dashboard
+            </SmoothNavLink>
+
+            <SmoothNavLink
+              className={({ isActive }) =>
+                `transition duration-300 ease-in-out hover:text-black dark:hover:text-white ${isActive ? "text-emerald-300" : "text-neutral-600"}`
+              }
+              to="scraper"
+            >
+              Scraper
+            </SmoothNavLink>
+          </Show>
           {/* Auth links */}
           <div className="ml-4 flex items-center gap-4">
-            <SmoothNavLink
+            {/* <SmoothNavLink
               to="/login"
               className="rounded-md border border-neutral-100/20 bg-black px-4 py-2 text-white transition hover:text-white/80 dark:hover:bg-neutral-900"
             >
@@ -100,7 +114,28 @@ export default function Navbar() {
               className="rounded-md border bg-white px-4 py-2 text-black transition hover:bg-neutral-200"
             >
               Sign Up
-            </SmoothNavLink>
+            </SmoothNavLink> */}
+
+            {/* When user is signed OUT */}
+            <Show when={"signed-out"}>
+              <SignInButton mode="modal">
+                <button className="rounded-md border border-neutral-100/20 bg-black px-4 py-2 text-white transition hover:text-white/80 dark:hover:bg-neutral-900">
+                  Login
+                </button>
+              </SignInButton>
+
+              <SignUpButton mode="modal">
+                <button className="rounded-md border bg-white px-4 py-2 text-black transition hover:bg-neutral-200">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </Show>
+
+            {/* When user is signed IN */}
+            <Show when={"signed-in"}>
+              {/* <UserButton afterSignOutUrl="/" /> */}
+              <UserButton />
+            </Show>
 
             {/* Dark Mode Button */}
             <ThemeToggleButton />
@@ -117,15 +152,20 @@ export default function Navbar() {
           <SmoothNavLink onClick={() => setOpen(false)} to="/">
             Home
           </SmoothNavLink>
-          <SmoothNavLink onClick={() => setOpen(false)} to="/chat">
-            Chat
-          </SmoothNavLink>
-          <SmoothNavLink onClick={() => setOpen(false)} to="/scraper">
-            Scraper
-          </SmoothNavLink>
 
+          <Show when={"signed-in"}>
+            <SmoothNavLink onClick={() => setOpen(false)} to="/chat">
+              Chat
+            </SmoothNavLink>
+            <SmoothNavLink onClick={() => setOpen(false)} to="/dashboard">
+              Dashboard
+            </SmoothNavLink>
+            <SmoothNavLink onClick={() => setOpen(false)} to="/scraper">
+              Scraper
+            </SmoothNavLink>
+          </Show>
           <div className="flex gap-4 pt-4">
-            <SmoothNavLink
+            {/* <SmoothNavLink
               onClick={() => setOpen(false)}
               className="rounded-md border border-neutral-100/20 bg-black px-4 py-2 text-white transition hover:text-white/80 dark:hover:bg-neutral-900"
               to="/login"
@@ -136,10 +176,36 @@ export default function Navbar() {
             <SmoothNavLink
               onClick={() => setOpen(false)}
               className="rounded-md border bg-white px-4 py-2 text-black transition hover:bg-neutral-200"
-              to="/sign up"
+              to="/signup"
             >
               Sign Up
-            </SmoothNavLink>
+            </SmoothNavLink> */}
+
+            <Show when={"signed-out"}>
+              <SignInButton mode="modal">
+                <button
+                  onClick={() => setOpen(false)}
+                  className="rounded-md border border-neutral-100/20 bg-black px-4 py-2 text-white"
+                >
+                  Login
+                </button>
+              </SignInButton>
+
+              <SignUpButton mode="modal">
+                <button
+                  onClick={() => setOpen(false)}
+                  className="rounded-md border bg-white px-4 py-2 text-black"
+                >
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </Show>
+
+            <Show when={"signed-in"}>
+              {/* <UserButton afterSignOutUrl="/" /> */}
+              <UserButton />
+            </Show>
+
             {/* Dark Mode Button */}
             <ThemeToggleButton />
           </div>

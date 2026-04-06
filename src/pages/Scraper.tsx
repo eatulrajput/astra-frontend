@@ -76,44 +76,44 @@ export const Scraper = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-background text-foreground">
       
       <main className="mx-auto max-w-4xl px-4 py-6">
-        <h1 className="mb-4 text-2xl font-semibold">🕷️ KIIT Website Scraper</h1>
+        <h1 className="mb-4 text-4xl font-medium">KIIT Website Scraper</h1>
 
-        <div className="space-y-3 rounded-lg bg-gray-800 p-4 shadow-lg">
+        <div className="space-y-3 rounded-lg p-4 shadow-lg">
           {/* Inputs */}
           <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
             <div>
-              <label className="text-sm text-gray-300">Start URL</label>
+              <label className="text-sm">Start URL</label>
               <input
                 value={startUrl}
                 onChange={(e) => setStartUrl(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-gray-600 bg-gray-700 px-3 py-2"
+                className="mt-1 w-full rounded-lg border px-3 py-2"
               />
             </div>
 
             <div>
-              <label className="text-sm text-gray-300">Max Pages</label>
+              <label className="text-sm">Max Pages</label>
               <input
                 type="number"
                 min={1}
                 max={2000}
                 value={maxPages}
                 onChange={(e) => setMaxPages(Number(e.target.value))}
-                className="mt-1 w-full rounded-lg border border-gray-600 bg-gray-700 px-3 py-2"
+                className="mt-1 w-full rounded-lg border px-3 py-2"
               />
             </div>
 
             <div>
-              <label className="text-sm text-gray-300">Delay (seconds)</label>
+              <label className="text-sm">Delay (seconds)</label>
               <input
                 type="number"
                 step="0.1"
                 min={0}
                 value={delay}
                 onChange={(e) => setDelay(Number(e.target.value))}
-                className="mt-1 w-full rounded-lg border border-gray-600 bg-gray-700 px-3 py-2"
+                className="mt-1 w-full rounded-lg border px-3 py-2"
               />
             </div>
           </div>
@@ -130,7 +130,7 @@ export const Scraper = () => {
 
             <button
               onClick={checkScrapeStatus}
-              className="rounded-lg bg-gray-600 px-4 py-2 hover:bg-gray-500"
+              className="rounded-lg px-4 py-2"
             >
               Check Status
             </button>
@@ -151,7 +151,7 @@ export const Scraper = () => {
           </div>
 
           {/* Status */}
-          <pre className="overflow-x-auto rounded-lg border border-gray-700 bg-gray-900 p-3 text-sm whitespace-pre-wrap">
+          <pre className="overflow-x-auto rounded-lg border p-3 text-sm whitespace-pre-wrap">
             {status}
           </pre>
         </div>
