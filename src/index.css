@@ -31,8 +31,10 @@ html {
 @theme {
   --font-display: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 
-
-
+  /* Animations */
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-bubble: bubble 0.8s ease-out forwards;
+  --animate-hop: hop 2.5s ease-in-out infinite;
 
    /* Keyframes */
   @keyframes float {
@@ -64,10 +66,6 @@ html {
     }
   }
 
-  /* Animations */
-  --animate-float: float 3s ease-in-out infinite;
-  --animate-bubble: bubble 0.8s ease-out forwards;
-  --animate-hop: hop 2.5s ease-in-out infinite;
 }
 
 

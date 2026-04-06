@@ -3,33 +3,9 @@ import { motion } from "motion/react";
 import { Container } from "@/components/Container";
 import { AnimatedTooltip, LampContainer } from "@/components/ui";
 import { toast } from "sonner";
+import { TeamData } from "@/data/TeamData";
 
-const people = [
-  {
-    id: 1,
-    name: "Aritra Banerjee",
-    designation: "Machine Learning Engineer",
-    image: "/dev/dev1.webp",
-  },
-  {
-    id: 2,
-    name: "Arya Vats",
-    designation: "Data Scientist",
-    image: "/dev/dev2.webp",
-  },
-  {
-    id: 3,
-    name: "Atul Rajput",
-    designation: "Backend Developer",
-    image: "/dev/dev3.webp",
-  },
-  {
-    id: 4,
-    name: "Harsh Agrawalla",
-    designation: "Software Tester",
-    image: "/dev/dev4.webp",
-  },
-];
+
 
 type FormState = {
   name: string;
@@ -38,7 +14,7 @@ type FormState = {
 };
 
 export const Contact = () => {
-  const [form, setForm] = useState<FormState>({
+  const [formData, setFormData] = useState<FormState>({
     name: "",
     email: "",
     message: "",
@@ -49,14 +25,14 @@ export const Contact = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     // Validation
-    if (!form.name || !form.email || !form.message) {
+    if (!formData.name || !formData.email || !formData.message) {
       toast.warning("Missing information", {
         description: "Please fill in all fields before submitting.",
       });
@@ -73,7 +49,7 @@ export const Contact = () => {
         description: "We’ll get back to you shortly.",
       });
 
-      setForm({ name: "", email: "", message: "" });
+      setFormData({ name: "", email: "", message: "" });
     } catch {
       toast.error("Something went wrong", {
         description: "Please try again later.",
@@ -85,6 +61,7 @@ export const Contact = () => {
 
   return (
     <div>
+{/* Contact Heading */}
       <LampContainer>
         <motion.h1
           initial={{ opacity: 0.5, y: 100 }}
@@ -101,7 +78,7 @@ export const Contact = () => {
         </motion.h1>
       </LampContainer>
 
-      {/* Contact */}
+      {/* Contact Form */}
       <Container className="relative min-h-full overflow-hidden bg-cover bg-center dark:bg-slate-950">
         {/* background for contact */}
         <div className="from emerald-300 absolute inset-0 scale-105 bg-linear-to-b via-teal-300/10 to-emerald-50 bg-cover bg-center blur-sm dark:to-slate-950"></div>
@@ -120,7 +97,7 @@ export const Contact = () => {
             <input
               type="text"
               name="name"
-              value={form.name}
+              value={formData.name}
               onChange={handleChange}
               placeholder="Your name"
               className="w-full rounded-md border border-white/10 bg-white px-3 py-2 text-neutral-950 placeholder-neutral-500 focus:ring-2 focus:ring-emerald-400 focus:outline-none dark:bg-black/40 dark:text-white"
@@ -130,7 +107,7 @@ export const Contact = () => {
             <input
               type="email"
               name="email"
-              value={form.email}
+              value={formData.email}
               onChange={handleChange}
               placeholder="you@example.com"
               className="w-full rounded-md border border-white/10 bg-white px-3 py-2 text-neutral-950 placeholder-neutral-500 focus:ring-2 focus:ring-emerald-400 focus:outline-none dark:bg-black/40 dark:text-white"
@@ -140,7 +117,7 @@ export const Contact = () => {
             <textarea
               name="message"
               rows={5}
-              value={form.message}
+              value={formData.message}
               onChange={handleChange}
               placeholder="Your message..."
               className="row-10 w-full resize-none rounded-md border border-white/10 bg-white px-3 py-2 text-neutral-950 placeholder-neutral-500 focus:ring-2 focus:ring-emerald-400 focus:outline-none dark:bg-black/40 dark:text-white"
@@ -154,6 +131,7 @@ export const Contact = () => {
               {loading ? "Sending..." : "Send Message"}
             </button>
           </form>
+
         </div>
 
         <div className="min-h-screen">
@@ -170,7 +148,7 @@ export const Contact = () => {
             <p className="text-4xl">Meet our Team</p>
           </motion.h1>
           <div className="mb-10 flex w-full flex-row items-center justify-center hover:cursor-pointer">
-            <AnimatedTooltip items={people} />
+            <AnimatedTooltip items={TeamData} />
           </div>
         </div>
       </Container>

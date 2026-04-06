@@ -6,23 +6,54 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import Layout from "@/components/Layout.tsx";
-import { Home, Chat, Dashboard, Login, NotFound, Signup, Scraper } from "@/pages";
+import { Home, Chat, Dashboard, NotFound, Scraper } from "@/pages";
 import Lenis from "lenis";
-
-
-
+import ProtectedRoute from "./routes/ProtectedRoute";
+import DomainGuard from "./auth/DomainGuard";
+import { Terms } from "./agreements/Terms";
+import { Privacy } from "./agreements/Privacy";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
+        {/* Pages */}
         <Route path="" element={<Home />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/Login" element={<Login />} />
+
+        {/* Protected Routes */}
+        <Route
+          path="/chat"
+          element={
+            <ProtectedRoute>
+              <Chat />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/scraper"
+          element={
+            <ProtectedRoute>
+              <Scraper />
+            </ProtectedRoute>
+          }
+        />
+        {/* Auth */}
+        {/* <Route path="/Login" element={<Login />} /> */}
+        {/* <Route path="/signup" element={<Signup />} /> */}
+        {/* 404 Page */}
         <Route path="*" element={<NotFound />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/scraper" element={<Scraper />} />
+
+        {/* Agreements */}
+        <Route path="/terms" element={<Terms/>}/>
+        <Route path="/privacy" element={<Privacy/>}/>
       </Route>,
     ),
   );
@@ -62,15 +93,18 @@ function App() {
         data-[type=info]:bg-blue-500/10
         data-[type=info]:text-blue-400
         data-[type=info]:border-blue-400/20
-      `
+      `,
       },
     }}
-  />
+  />;
 
   return (
     <>
       {/* Toaster  */}
+      {/* Guard domain for KIIT Students */}
+      <DomainGuard>
       <RouterProvider router={router} />
+      </DomainGuard>
     </>
   );
 }
