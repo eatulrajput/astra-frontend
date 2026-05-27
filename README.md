@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5a09d0d6-15f0-44b5-a0a1-0a7231cde924/deploy-status)](https://app.netlify.com/projects/astraui/deploys)
+
 # Astra AI
 Astra AI is a chatbot based upon RAG architecture. RAG architecture stands for Retrieval-Augmented Generation. It is a design pattern used in AI systems (especially large language models) to improve responses by combining information retrieval with text generation.
 
