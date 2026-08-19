@@ -139,35 +139,6 @@ const data = [
   },
 ];
 
-const testimonials = [
-  {
-    quote: "It is big contribution back to our College",
-    name: "Aritra",
-    designation: "Final Year Student, ECS Branch",
-    src: "/dev1.webp",
-  },
-  {
-    quote:
-      "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
-    name: "Arya Vats",
-    designation: "Final Year Student, ECS Branch",
-    src: "/dev2.webp",
-  },
-  {
-    quote:
-      "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
-    name: "Atul",
-    designation: "Final Year Student, ECS Branch",
-    src: "dev3.webp",
-  },
-  {
-    quote: "It is a Great Platform for juniors.",
-    name: "Harsh",
-    designation: "Final Year Student, ECS Branch",
-    src: "/dev4.webp",
-  },
-];
-
 export const Home = () => {
   return (
     <div>
@@ -257,22 +228,6 @@ export const Home = () => {
 
       <div className="relative w-full overflow-clip">
         <Timeline data={data} />
-      </div>
-
-      <div className="min-h-screen">
-        <motion.h1
-          initial={{ opacity: 0.5, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
-          className="mx-auto mt-20 flex min-h-[50vh] items-center justify-center bg-linear-to-br from-slate-700 to-slate-500 bg-clip-text py-4 text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl dark:from-slate-300 dark:to-slate-500"
-        >
-          <p className="text-4xl">Testimonials</p>
-        </motion.h1>
-        <AnimatedTestimonials testimonials={testimonials} />
       </div>
 
       <Footer />
