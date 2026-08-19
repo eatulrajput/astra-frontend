@@ -100,10 +100,8 @@ function App() {
 
   return (
     <>
-      {/* Toaster  */}
-      {/* Guard domain for KIIT Students */}
       <DomainGuard>
-      <RouterProvider router={router} />
+        <RouterProvider router={router} />
       </DomainGuard>
     </>
   );
