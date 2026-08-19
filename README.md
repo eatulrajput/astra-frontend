@@ -41,6 +41,11 @@ Run the following commands using `pnpm` to check and format the codebase:
 pnpm lint
 ```
 
+### Build
+```bash
+pnpm build
+```
+
 ### Prettier Code Formatting
 ```bash
 # Check code formatting
