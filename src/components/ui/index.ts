@@ -4,3 +4,5 @@ export { LampContainer } from "./lamp";
 export { Timeline } from "./timeline";
 export { WobbleCard } from "./wobble-card";
 export { Contact } from "./Contact";
+export { SparklesCore } from "./sparkles";
+
