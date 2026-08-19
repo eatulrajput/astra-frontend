@@ -1,5 +1,4 @@
 import { motion } from "motion/react";
-import { AnimatedTestimonials } from "../components/ui/animated-testimonials";
 import { Timeline } from "../components/ui/timeline";
 import { WobbleCard } from "../components/ui/wobble-card";
 import { Footer } from "./Footer";
