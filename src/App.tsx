@@ -52,8 +52,8 @@ function App() {
         <Route path="*" element={<NotFound />} />
 
         {/* Agreements */}
-        <Route path="/terms" element={<Terms/>}/>
-        <Route path="/privacy" element={<Privacy/>}/>
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
       </Route>,
     ),
   );

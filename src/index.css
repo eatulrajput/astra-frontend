@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..700;1,400..700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
 /* For darkmode */
 @custom-variant dark (&:is(.dark *));
 
-::selection{
+::selection {
   color: var(--color-emerald-300);
   background-color: var(--color-transparent);
 }
@@ -16,7 +16,8 @@
   height: 0px;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   scrollbar-width: none; /* Firefox */
@@ -24,12 +25,19 @@ html, body {
 
 @layer base {
   body {
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family:
+      "Plus Jakarta Sans",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--color-neutral-50, #fafafa);
     color: var(--color-neutral-900, #171717);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
   }
 
   html.dark body {
@@ -39,17 +47,22 @@ html, body {
 }
 
 @theme {
-  --font-display: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display:
+    "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  --font-sans:
+    "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
 
   /* Animations */
   --animate-float: float 3s ease-in-out infinite;
   --animate-bubble: bubble 0.8s ease-out forwards;
   --animate-hop: hop 2.5s ease-in-out infinite;
 
-   /* Keyframes */
+  /* Keyframes */
   @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0);
     }
     50% {
@@ -69,16 +82,15 @@ html, body {
   }
 
   @keyframes hop {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0);
     }
     50% {
       transform: translateY(-10px);
     }
   }
-
 }
-
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

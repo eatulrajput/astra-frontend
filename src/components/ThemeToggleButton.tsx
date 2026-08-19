@@ -2,14 +2,18 @@ import { IconSun, IconMoon } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 
 const ThemeToggleButton = () => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("theme-customised") || "light";
+  });
 
-  // Load saved theme on mount
+  // Apply dark class on mount based on initial state
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme-customised") || "light";
-    setTheme(savedTheme);
-    if (savedTheme === "dark") document.documentElement.classList.add("dark");
-  }, []);
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
 
   const handleThemeChange = () => {
     const isDark = document.documentElement.classList.toggle("dark");

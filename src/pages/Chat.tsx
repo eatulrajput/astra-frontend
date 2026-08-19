@@ -1,12 +1,29 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  IconPaperclip, IconSend, IconX, IconSettings,
-  IconRobot, IconUser, IconLoader2, IconCheck,
-  IconAlertCircle, IconChevronDown, IconLink,
-  IconFileTypePdf, IconTrash, IconEye, IconEyeOff,
-  IconSparkles, IconAlertTriangle, IconRefresh, IconCopy,
-  IconMessageCode, IconBulb, IconBook, IconBrain,
+  IconPaperclip,
+  IconSend,
+  IconX,
+  IconSettings,
+  IconRobot,
+  IconUser,
+  IconLoader2,
+  IconCheck,
+  IconAlertCircle,
+  IconChevronDown,
+  IconLink,
+  IconFileTypePdf,
+  IconTrash,
+  IconEye,
+  IconEyeOff,
+  IconSparkles,
+  IconAlertTriangle,
+  IconRefresh,
+  IconCopy,
+  IconMessageCode,
+  IconBulb,
+  IconBook,
+  IconBrain,
 } from "@tabler/icons-react";
 import { Container } from "../components/Container";
 import { useUser, useAuth } from "@clerk/react";
@@ -77,7 +94,9 @@ async function buildHeaders(
   clerkUserId: string,
   json = false,
 ): Promise<Record<string, string>> {
-  const headers: Record<string, string> = json ? { "Content-Type": "application/json" } : {};
+  const headers: Record<string, string> = json
+    ? { "Content-Type": "application/json" }
+    : {};
   if (clerkUserId) {
     headers["X-Clerk-User-Id"] = clerkUserId;
   }
@@ -86,14 +105,20 @@ async function buildHeaders(
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
     }
-  } catch (e) {
+  } catch {
     // Ignore token fetch error
   }
   return headers;
 }
 
 // ─── Toast system ─────────────────────────────────────────────────────────────
-function ToastContainer({ toasts, onDismiss }: { toasts: Toast[]; onDismiss: (id: number) => void }) {
+function ToastContainer({
+  toasts,
+  onDismiss,
+}: {
+  toasts: Toast[];
+  onDismiss: (id: number) => void;
+}) {
   return (
     <div className="fixed top-4 right-4 z-[100] flex flex-col gap-2 w-80 pointer-events-none">
       <AnimatePresence>
@@ -107,8 +132,8 @@ function ToastContainer({ toasts, onDismiss }: { toasts: Toast[]; onDismiss: (id
               t.type === "success"
                 ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-700 dark:text-emerald-300"
                 : t.type === "error"
-                ? "bg-red-500/10 border-red-500/30 text-red-700 dark:text-red-300"
-                : "bg-blue-500/10 border-blue-500/30 text-blue-700 dark:text-blue-300"
+                  ? "bg-red-500/10 border-red-500/30 text-red-700 dark:text-red-300"
+                  : "bg-blue-500/10 border-blue-500/30 text-blue-700 dark:text-blue-300"
             }`}
           >
             <div className="flex-shrink-0 mt-0.5">
@@ -121,7 +146,10 @@ function ToastContainer({ toasts, onDismiss }: { toasts: Toast[]; onDismiss: (id
               )}
             </div>
             <p className="flex-1 leading-snug">{t.message}</p>
-            <button onClick={() => onDismiss(t.id)} className="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity">
+            <button
+              onClick={() => onDismiss(t.id)}
+              className="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity"
+            >
               <IconX size={13} />
             </button>
           </motion.div>
@@ -133,12 +161,22 @@ function ToastContainer({ toasts, onDismiss }: { toasts: Toast[]; onDismiss: (id
 
 function useToast() {
   const [toasts, setToasts] = useState<Toast[]>([]);
-  const add = useCallback((type: Toast["type"], message: string, duration = 4000) => {
-    const id = Date.now();
-    setToasts((prev) => [...prev, { id, type, message }]);
-    if (duration > 0) setTimeout(() => setToasts((prev) => prev.filter((t) => t.id !== id)), duration);
-  }, []);
-  const dismiss = useCallback((id: number) => setToasts((prev) => prev.filter((t) => t.id !== id)), []);
+  const add = useCallback(
+    (type: Toast["type"], message: string, duration = 4000) => {
+      const id = Date.now();
+      setToasts((prev) => [...prev, { id, type, message }]);
+      if (duration > 0)
+        setTimeout(
+          () => setToasts((prev) => prev.filter((t) => t.id !== id)),
+          duration,
+        );
+    },
+    [],
+  );
+  const dismiss = useCallback(
+    (id: number) => setToasts((prev) => prev.filter((t) => t.id !== id)),
+    [],
+  );
   return { toasts, toast: add, dismiss };
 }
 
@@ -192,7 +230,9 @@ function CodeBlock({ language, code }: { language: string; code: string }) {
   return (
     <div className="my-3.5 rounded-xl border border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-950 text-neutral-100 overflow-hidden font-mono text-xs shadow-xl">
       <div className="flex items-center justify-between px-3.5 py-2 bg-neutral-900/90 border-b border-neutral-800 text-[11px] text-neutral-400">
-        <span className="font-semibold text-emerald-400 uppercase tracking-wider">{language || "code"}</span>
+        <span className="font-semibold text-emerald-400 uppercase tracking-wider">
+          {language || "code"}
+        </span>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -201,7 +241,8 @@ function CodeBlock({ language, code }: { language: string; code: string }) {
         >
           {copied ? (
             <>
-              <IconCheck size={12} className="text-emerald-400" /> <span className="text-emerald-400">Copied</span>
+              <IconCheck size={12} className="text-emerald-400" />{" "}
+              <span className="text-emerald-400">Copied</span>
             </>
           ) : (
             "Copy code"
@@ -277,73 +318,130 @@ function MessageBubble({
           isUser
             ? "bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white rounded-tr-md shadow-emerald-600/10"
             : msg.error
-            ? "bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/30 rounded-tl-md"
-            : "bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl text-neutral-800 dark:text-neutral-100 border border-neutral-200/80 dark:border-neutral-800/80 rounded-tl-md shadow-neutral-200/50 dark:shadow-none"
+              ? "bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/30 rounded-tl-md"
+              : "bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl text-neutral-800 dark:text-neutral-100 border border-neutral-200/80 dark:border-neutral-800/80 rounded-tl-md shadow-neutral-200/50 dark:shadow-none"
         }`}
       >
         {msg.isStreaming && !msg.text ? (
           <TypingDots />
         ) : isUser ? (
-          <p className="whitespace-pre-wrap font-medium leading-relaxed">{msg.text}</p>
+          <p className="whitespace-pre-wrap font-medium leading-relaxed">
+            {msg.text}
+          </p>
         ) : (
           <>
             <div className="prose prose-neutral dark:prose-invert max-w-none text-sm sm:text-[14.5px] leading-relaxed">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  p({ children }: any) {
-                    return <p className="mb-3.5 last:mb-0 leading-7 text-neutral-800 dark:text-neutral-200 tracking-wide">{children}</p>;
+                  p({ children }: { children?: React.ReactNode }) {
+                    return (
+                      <p className="mb-3.5 last:mb-0 leading-7 text-neutral-800 dark:text-neutral-200 tracking-wide">
+                        {children}
+                      </p>
+                    );
                   },
-                  h1({ children }: any) {
-                    return <h1 className="text-lg font-bold text-neutral-900 dark:text-white mt-5 mb-2.5 pb-1.5 border-b border-neutral-200 dark:border-neutral-800">{children}</h1>;
+                  h1({ children }: { children?: React.ReactNode }) {
+                    return (
+                      <h1 className="text-lg font-bold text-neutral-900 dark:text-white mt-5 mb-2.5 pb-1.5 border-b border-neutral-200 dark:border-neutral-800">
+                        {children}
+                      </h1>
+                    );
                   },
-                  h2({ children }: any) {
-                    return <h2 className="text-base font-bold text-neutral-900 dark:text-white mt-4 mb-2">{children}</h2>;
+                  h2({ children }: { children?: React.ReactNode }) {
+                    return (
+                      <h2 className="text-base font-bold text-neutral-900 dark:text-white mt-4 mb-2">
+                        {children}
+                      </h2>
+                    );
                   },
-                  h3({ children }: any) {
-                    return <h3 className="text-sm font-bold text-emerald-600 dark:text-emerald-400 mt-4 mb-1.5 uppercase tracking-wider">{children}</h3>;
+                  h3({ children }: { children?: React.ReactNode }) {
+                    return (
+                      <h3 className="text-sm font-bold text-emerald-600 dark:text-emerald-400 mt-4 mb-1.5 uppercase tracking-wider">
+                        {children}
+                      </h3>
+                    );
                   },
-                  ul({ children }: any) {
-                    return <ul className="my-3.5 pl-5 space-y-2 list-disc text-neutral-800 dark:text-neutral-200">{children}</ul>;
+                  ul({ children }: { children?: React.ReactNode }) {
+                    return (
+                      <ul className="my-3.5 pl-5 space-y-2 list-disc text-neutral-800 dark:text-neutral-200">
+                        {children}
+                      </ul>
+                    );
                   },
-                  ol({ children }: any) {
-                    return <ol className="my-3.5 pl-5 space-y-2 list-decimal text-neutral-800 dark:text-neutral-200">{children}</ol>;
+                  ol({ children }: { children?: React.ReactNode }) {
+                    return (
+                      <ol className="my-3.5 pl-5 space-y-2 list-decimal text-neutral-800 dark:text-neutral-200">
+                        {children}
+                      </ol>
+                    );
                   },
-                  li({ children }: any) {
+                  li({ children }: { children?: React.ReactNode }) {
                     return <li className="leading-6">{children}</li>;
                   },
-                  code({ node, inline, className, children, ...props }: any) {
+                  code({
+                    inline,
+                    className,
+                    children,
+                    ...props
+                  }: {
+                    inline?: boolean;
+                    className?: string;
+                    children?: React.ReactNode;
+                  }) {
                     const match = /language-(\w+)/.exec(className || "");
                     const codeString = String(children).replace(/\n$/, "");
                     return !inline ? (
-                      <CodeBlock language={match ? match[1] : ""} code={codeString} />
+                      <CodeBlock
+                        language={match ? match[1] : ""}
+                        code={codeString}
+                      />
                     ) : (
-                      <code className="text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-md font-mono text-[13px] font-semibold" {...props}>
+                      <code
+                        className="text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-md font-mono text-[13px] font-semibold"
+                        {...props}
+                      >
                         {children}
                       </code>
                     );
                   },
-                  table({ children }: any) {
+                  table({ children }: { children?: React.ReactNode }) {
                     return (
                       <div className="my-4 overflow-x-auto rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm">
-                        <table className="w-full text-left text-xs border-collapse">{children}</table>
+                        <table className="w-full text-left text-xs border-collapse">
+                          {children}
+                        </table>
                       </div>
                     );
                   },
-                  thead({ children }: any) {
-                    return <thead className="bg-neutral-100 dark:bg-neutral-800/80 text-neutral-900 dark:text-white font-semibold border-b border-neutral-200 dark:border-neutral-800">{children}</thead>;
+                  thead({ children }: { children?: React.ReactNode }) {
+                    return (
+                      <thead className="bg-neutral-100 dark:bg-neutral-800/80 text-neutral-900 dark:text-white font-semibold border-b border-neutral-200 dark:border-neutral-800">
+                        {children}
+                      </thead>
+                    );
                   },
-                  th({ children }: any) {
+                  th({ children }: { children?: React.ReactNode }) {
                     return <th className="p-3 font-semibold">{children}</th>;
                   },
-                  td({ children }: any) {
-                    return <td className="p-3 border-t border-neutral-100 dark:border-neutral-800/40 leading-relaxed">{children}</td>;
+                  td({ children }: { children?: React.ReactNode }) {
+                    return (
+                      <td className="p-3 border-t border-neutral-100 dark:border-neutral-800/40 leading-relaxed">
+                        {children}
+                      </td>
+                    );
                   },
-                  blockquote({ children }: any) {
-                    return <blockquote className="my-3 border-l-4 border-emerald-500 bg-emerald-500/10 px-4 py-2.5 rounded-r-xl italic text-neutral-700 dark:text-neutral-300 leading-relaxed">{children}</blockquote>;
+                  blockquote({ children }: { children?: React.ReactNode }) {
+                    return (
+                      <blockquote className="my-3 border-l-4 border-emerald-500 bg-emerald-500/10 px-4 py-2.5 rounded-r-xl italic text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                        {children}
+                      </blockquote>
+                    );
                   },
                   hr() {
-                    return <hr className="my-4 border-neutral-200 dark:border-neutral-800" />;
+                    return (
+                      <hr className="my-4 border-neutral-200 dark:border-neutral-800" />
+                    );
                   },
                 }}
               >
@@ -358,7 +456,8 @@ function MessageBubble({
                 {msg.chunksUsed !== undefined && msg.chunksUsed > 0 ? (
                   <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
                     <IconSparkles size={11} />
-                    {msg.chunksUsed} PDF chunk{msg.chunksUsed !== 1 ? "s" : ""} indexed
+                    {msg.chunksUsed} PDF chunk{msg.chunksUsed !== 1 ? "s" : ""}{" "}
+                    indexed
                   </span>
                 ) : (
                   <span />
@@ -373,7 +472,9 @@ function MessageBubble({
                   {copiedMarkdown ? (
                     <>
                       <IconCheck size={13} className="text-emerald-500" />
-                      <span className="text-emerald-600 dark:text-emerald-400">Copied QA Markdown</span>
+                      <span className="text-emerald-600 dark:text-emerald-400">
+                        Copied QA Markdown
+                      </span>
                     </>
                   ) : (
                     <>
@@ -406,13 +507,15 @@ function PdfLibrary({
   if (loading)
     return (
       <div className="flex items-center gap-2 text-xs text-neutral-400 px-1 py-2">
-        <IconLoader2 size={13} className="animate-spin text-emerald-500" /> Loading PDF Knowledge Base…
+        <IconLoader2 size={13} className="animate-spin text-emerald-500" />{" "}
+        Loading PDF Knowledge Base…
       </div>
     );
   if (!pdfs.length)
     return (
       <p className="text-xs text-neutral-400 px-1 py-2">
-        No PDF documents active yet — click the paperclip button in the chat box to upload study notes.
+        No PDF documents active yet — click the paperclip button in the chat box
+        to upload study notes.
       </p>
     );
 
@@ -421,7 +524,8 @@ function PdfLibrary({
     <div className="space-y-2">
       <p className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 px-1 mb-2 flex items-center gap-1">
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-        {activeCount} of {pdfs.length} PDF{pdfs.length !== 1 ? "s" : ""} active for RAG Vector Search
+        {activeCount} of {pdfs.length} PDF{pdfs.length !== 1 ? "s" : ""} active
+        for RAG Vector Search
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         {pdfs.map((pdf) => (
@@ -434,10 +538,17 @@ function PdfLibrary({
                 : "bg-neutral-100/80 dark:bg-neutral-900/80 border-neutral-200/80 dark:border-neutral-800/80 opacity-60"
             }`}
           >
-            <IconFileTypePdf size={18} className={pdf.active ? "text-emerald-500" : "text-neutral-400"} />
+            <IconFileTypePdf
+              size={18}
+              className={pdf.active ? "text-emerald-500" : "text-neutral-400"}
+            />
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold truncate">{pdf.originalFilename}</p>
-              <p className="text-[10px] text-neutral-400">{pdf.chunkCount} vector chunks</p>
+              <p className="text-xs font-semibold truncate">
+                {pdf.originalFilename}
+              </p>
+              <p className="text-[10px] text-neutral-400">
+                {pdf.chunkCount} vector chunks
+              </p>
             </div>
             <button
               onClick={() => onToggle(pdf.id)}
@@ -492,7 +603,10 @@ function ModelSelectorPill({
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -510,30 +624,51 @@ function ModelSelectorPill({
     setIsFetchingApi(true);
     try {
       const res = await fetch("https://api.groq.com/openai/v1/models", {
-        headers: { Authorization: `Bearer ${cleanKey}`, "Content-Type": "application/json" },
+        headers: {
+          Authorization: `Bearer ${cleanKey}`,
+          "Content-Type": "application/json",
+        },
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       const activeList: ModelOption[] = (data.data || [])
-        .filter((item: any) => item.active !== false && item.id)
-        .map((item: any) => ({ value: item.id, label: `${item.id}` }))
-        .sort((a: ModelOption, b: ModelOption) => a.value.localeCompare(b.value));
+        .filter(
+          (item: { id?: string; active?: boolean }) =>
+            item.active !== false && Boolean(item.id),
+        )
+        .map((item: { id?: string; active?: boolean }) => ({
+          value: item.id!,
+          label: `${item.id}`,
+        }))
+        .sort((a: ModelOption, b: ModelOption) =>
+          a.value.localeCompare(b.value),
+        );
 
       if (activeList.length) {
         setGroqModelsList(activeList);
         onToast("success", `Fetched ${activeList.length} Groq API models!`);
       }
     } catch (err) {
-      onToast("error", `Failed to fetch API models: ${err instanceof Error ? err.message : "Error"}`);
+      onToast(
+        "error",
+        `Failed to fetch API models: ${err instanceof Error ? err.message : "Error"}`,
+      );
     } finally {
       setIsFetchingApi(false);
     }
   };
 
   const activeModelValue = provider === "groq" ? groqModel : ollamaModel;
-  const currentList = provider === "groq" ? (groqModelsList.length ? groqModelsList : DEFAULT_GROQ_MODELS) : OLLAMA_MODELS;
+  const currentList =
+    provider === "groq"
+      ? groqModelsList.length
+        ? groqModelsList
+        : DEFAULT_GROQ_MODELS
+      : OLLAMA_MODELS;
   const activeOption = currentList.find((m) => m.value === activeModelValue);
-  const activeLabel = activeOption ? activeOption.label.split("(")[0].trim() : activeModelValue;
+  const activeLabel = activeOption
+    ? activeOption.label.split("(")[0].trim()
+    : activeModelValue;
 
   return (
     <div className="relative flex-shrink-0" ref={dropdownRef}>
@@ -549,8 +684,13 @@ function ModelSelectorPill({
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
           <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
         </span>
-        <span className="truncate max-w-[85px] sm:max-w-[125px] font-mono text-[11px]">{activeLabel}</span>
-        <IconChevronDown size={12} className={`text-neutral-400 flex-shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+        <span className="truncate max-w-[85px] sm:max-w-[125px] font-mono text-[11px]">
+          {activeLabel}
+        </span>
+        <IconChevronDown
+          size={12}
+          className={`text-neutral-400 flex-shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+        />
       </motion.button>
 
       {/* Floating Popover */}
@@ -611,7 +751,10 @@ function ModelSelectorPill({
                   className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1 disabled:opacity-50"
                   title="Fetch live models via Groq API"
                 >
-                  <IconRefresh size={11} className={isFetchingApi ? "animate-spin" : ""} />
+                  <IconRefresh
+                    size={11}
+                    className={isFetchingApi ? "animate-spin" : ""}
+                  />
                   Fetch API
                 </button>
               </div>
@@ -647,7 +790,12 @@ function ModelSelectorPill({
                     }`}
                   >
                     <span className="truncate pr-2">{m.label}</span>
-                    {isSelected && <IconCheck size={14} className="text-emerald-500 flex-shrink-0" />}
+                    {isSelected && (
+                      <IconCheck
+                        size={14}
+                        className="text-emerald-500 flex-shrink-0"
+                      />
+                    )}
                   </motion.button>
                 );
               })}
@@ -674,17 +822,32 @@ function ModelSelectorPill({
 
 // ─── Settings Panel ───────────────────────────────────────────────────────────
 function SettingsPanel({
-  provider, setProvider, groqKey, setGroqKey, groqModel, setGroqModel,
-  groqModelsList, setGroqModelsList,
-  ollamaUrl, setOllamaUrl, ollamaModel, setOllamaModel, onClose, onSave,
+  provider,
+  setProvider,
+  groqKey,
+  setGroqKey,
+  groqModel,
+  setGroqModel,
+  setGroqModelsList,
+  ollamaUrl,
+  setOllamaUrl,
+  onClose,
+  onSave,
 }: {
-  provider: LLMProvider; setProvider: (p: LLMProvider) => void;
-  groqKey: string; setGroqKey: (k: string) => void;
-  groqModel: string; setGroqModel: (m: string) => void;
-  groqModelsList: ModelOption[]; setGroqModelsList: (list: ModelOption[]) => void;
-  ollamaUrl: string; setOllamaUrl: (u: string) => void;
-  ollamaModel: string; setOllamaModel: (m: string) => void;
-  onClose: () => void; onSave: () => void;
+  provider: LLMProvider;
+  setProvider: (p: LLMProvider) => void;
+  groqKey: string;
+  setGroqKey: (k: string) => void;
+  groqModel: string;
+  setGroqModel: (m: string) => void;
+  groqModelsList?: ModelOption[];
+  setGroqModelsList: (list: ModelOption[]) => void;
+  ollamaUrl: string;
+  setOllamaUrl: (u: string) => void;
+  ollamaModel?: string;
+  setOllamaModel?: (m: string) => void;
+  onClose: () => void;
+  onSave: () => void;
 }) {
   const [fetchingModels, setFetchingModels] = useState(false);
   const [fetchStatus, setFetchStatus] = useState<string | null>(null);
@@ -715,12 +878,17 @@ function SettingsPanel({
         const rawList = data.data || [];
 
         const activeList: ModelOption[] = rawList
-          .filter((item: any) => item.active !== false && item.id)
-          .map((item: any) => ({
+          .filter(
+            (item: { active?: boolean; id?: string }) =>
+              item.active !== false && item.id,
+          )
+          .map((item: { id: string; owned_by?: string }) => ({
             value: item.id,
             label: `${item.id} (${item.owned_by || "groq"})`,
           }))
-          .sort((a: ModelOption, b: ModelOption) => a.value.localeCompare(b.value));
+          .sort((a: ModelOption, b: ModelOption) =>
+            a.value.localeCompare(b.value),
+          );
 
         if (activeList.length > 0) {
           setGroqModelsList(activeList);
@@ -729,20 +897,16 @@ function SettingsPanel({
             setGroqModel(activeList[0].value);
           }
         }
-      } catch (err: any) {
-        setFetchStatus(`Note: ${err.message || "Using active model catalog"}`);
+      } catch (err) {
+        const msg =
+          err instanceof Error ? err.message : "Error fetching catalog";
+        setFetchStatus(`Note: ${msg}`);
       } finally {
         setFetchingModels(false);
       }
     },
-    [groqModel, setGroqModel],
+    [groqModel, setGroqModel, setGroqModelsList],
   );
-
-  useEffect(() => {
-    if (provider === "groq" && groqKey.trim().startsWith("gsk_")) {
-      fetchLiveModels(groqKey);
-    }
-  }, [provider, groqKey, fetchLiveModels]);
 
   return (
     <motion.div
@@ -760,7 +924,9 @@ function SettingsPanel({
         <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-50/50 dark:bg-neutral-950/50">
           <div className="flex items-center gap-2">
             <IconSettings size={18} className="text-emerald-500" />
-            <h2 className="font-bold text-neutral-900 dark:text-white">LLM Configuration</h2>
+            <h2 className="font-bold text-neutral-900 dark:text-white">
+              LLM Configuration
+            </h2>
           </div>
           <motion.button
             whileHover={{ scale: 1.1 }}
@@ -806,7 +972,10 @@ function SettingsPanel({
                     disabled={fetchingModels || !groqKey.trim()}
                     className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1 disabled:opacity-50"
                   >
-                    <IconRefresh size={12} className={fetchingModels ? "animate-spin" : ""} />
+                    <IconRefresh
+                      size={12}
+                      className={fetchingModels ? "animate-spin" : ""}
+                    />
                     Fetch Models
                   </button>
                 </div>
@@ -819,12 +988,19 @@ function SettingsPanel({
                 />
                 <p className="text-xs text-neutral-400 mt-1">
                   Get your key at{" "}
-                  <a href="https://console.groq.com" target="_blank" rel="noreferrer" className="text-emerald-500 hover:underline font-semibold">
+                  <a
+                    href="https://console.groq.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-emerald-500 hover:underline font-semibold"
+                  >
                     console.groq.com
                   </a>
                 </p>
                 {fetchStatus && (
-                  <p className={`text-xs mt-1 font-semibold ${fetchStatus.includes("Error") ? "text-red-500" : "text-emerald-500"}`}>
+                  <p
+                    className={`text-xs mt-1 font-semibold ${fetchStatus.includes("Error") ? "text-red-500" : "text-emerald-500"}`}
+                  >
                     {fetchStatus}
                   </p>
                 )}
@@ -836,7 +1012,10 @@ function SettingsPanel({
             <div className="space-y-4">
               <div className="p-3.5 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl">
                 <p className="text-xs text-emerald-700 dark:text-emerald-300 font-medium leading-relaxed">
-                  📋 Ensure Ollama is running locally: <code className="bg-emerald-500/20 px-1.5 py-0.5 rounded font-mono">ollama serve</code>
+                  📋 Ensure Ollama is running locally:{" "}
+                  <code className="bg-emerald-500/20 px-1.5 py-0.5 rounded font-mono">
+                    ollama serve
+                  </code>
                 </p>
               </div>
               <div>
@@ -856,7 +1035,10 @@ function SettingsPanel({
         </div>
 
         <div className="px-6 py-4 border-t border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-50/50 dark:bg-neutral-950/50 flex gap-2.5 justify-end">
-          <button onClick={onClose} className="px-4 py-2.5 text-xs font-semibold text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-xl transition-colors">
+          <button
+            onClick={onClose}
+            className="px-4 py-2.5 text-xs font-semibold text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-xl transition-colors"
+          >
             Cancel
           </button>
           <motion.button
@@ -886,10 +1068,26 @@ function SaasHeroGate({
   onPromptClick: (prompt: string) => void;
 }) {
   const suggestions = [
-    { icon: <IconBook size={18} className="text-emerald-500" />, title: "Summarize PDF Notes", desc: "Extract core topics & concepts" },
-    { icon: <IconBrain size={18} className="text-teal-500" />, title: "Key Exam Concepts", desc: "List high-yield revision points" },
-    { icon: <IconBulb size={18} className="text-amber-500" />, title: "Explain Step-by-Step", desc: "Break down complex formulas" },
-    { icon: <IconMessageCode size={18} className="text-cyan-500" />, title: "Code & Architecture", desc: "Generate modular python/ts code" },
+    {
+      icon: <IconBook size={18} className="text-emerald-500" />,
+      title: "Summarize PDF Notes",
+      desc: "Extract core topics & concepts",
+    },
+    {
+      icon: <IconBrain size={18} className="text-teal-500" />,
+      title: "Key Exam Concepts",
+      desc: "List high-yield revision points",
+    },
+    {
+      icon: <IconBulb size={18} className="text-amber-500" />,
+      title: "Explain Step-by-Step",
+      desc: "Break down complex formulas",
+    },
+    {
+      icon: <IconMessageCode size={18} className="text-cyan-500" />,
+      title: "Code & Architecture",
+      desc: "Generate modular python/ts code",
+    },
   ];
 
   return (
@@ -908,10 +1106,14 @@ function SaasHeroGate({
 
       <div>
         <h2 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-white tracking-tight">
-          Welcome back, <span className="bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 bg-clip-text text-transparent">{firstName}</span>
+          Welcome back,{" "}
+          <span className="bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
+            {firstName}
+          </span>
         </h2>
         <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-2 leading-relaxed max-w-md mx-auto">
-          Universal RAG Assistant powered by pgvector semantic retrieval and high-speed LLM inference.
+          Universal RAG Assistant powered by pgvector semantic retrieval and
+          high-speed LLM inference.
         </p>
       </div>
 
@@ -934,9 +1136,13 @@ function SaasHeroGate({
               onClick={() => onPromptClick(s.title)}
               className="flex items-start gap-3 p-4 rounded-2xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800/80 shadow-md text-left transition-all hover:border-emerald-500/50"
             >
-              <div className="p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 flex-shrink-0">{s.icon}</div>
+              <div className="p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 flex-shrink-0">
+                {s.icon}
+              </div>
               <div>
-                <p className="text-xs font-bold text-neutral-900 dark:text-white">{s.title}</p>
+                <p className="text-xs font-bold text-neutral-900 dark:text-white">
+                  {s.title}
+                </p>
                 <p className="text-[11px] text-neutral-400 mt-0.5">{s.desc}</p>
               </div>
             </motion.button>
@@ -959,13 +1165,23 @@ export const Chat = () => {
   // ── LLM config ───────────────────────────────────────────────────────────
   const [showSettings, setShowSettings] = useState(false);
   const [provider, setProvider] = useState<LLMProvider>(
-    () => (localStorage.getItem("rag_provider") as LLMProvider) ?? "groq"
+    () => (localStorage.getItem("rag_provider") as LLMProvider) ?? "groq",
   );
-  const [groqKey, setGroqKey] = useState(() => localStorage.getItem("rag_groq_key") ?? "");
-  const [groqModel, setGroqModel] = useState(() => localStorage.getItem("rag_groq_model") ?? DEFAULT_GROQ_MODELS[0].value);
-  const [groqModelsList, setGroqModelsList] = useState<ModelOption[]>(DEFAULT_GROQ_MODELS);
-  const [ollamaUrl, setOllamaUrl] = useState(() => localStorage.getItem("rag_ollama_url") ?? "http://localhost:11434");
-  const [ollamaModel, setOllamaModel] = useState(() => localStorage.getItem("rag_ollama_model") ?? OLLAMA_MODELS[0].value);
+  const [groqKey, setGroqKey] = useState(
+    () => localStorage.getItem("rag_groq_key") ?? "",
+  );
+  const [groqModel, setGroqModel] = useState(
+    () =>
+      localStorage.getItem("rag_groq_model") ?? DEFAULT_GROQ_MODELS[0].value,
+  );
+  const [groqModelsList, setGroqModelsList] =
+    useState<ModelOption[]>(DEFAULT_GROQ_MODELS);
+  const [ollamaUrl, setOllamaUrl] = useState(
+    () => localStorage.getItem("rag_ollama_url") ?? "http://localhost:11434",
+  );
+  const [ollamaModel, setOllamaModel] = useState(
+    () => localStorage.getItem("rag_ollama_model") ?? OLLAMA_MODELS[0].value,
+  );
   const isConfigured = provider === "ollama" || !!groqKey;
 
   // ── Chat state ────────────────────────────────────────────────────────────
@@ -1019,15 +1235,27 @@ export const Chat = () => {
       const data = await res.json();
       if (data.pdfs) setPdfs(data.pdfs);
     } catch (err) {
-      toast("error", `Failed to load PDFs: ${err instanceof Error ? err.message : "Network error"}`);
+      toast(
+        "error",
+        `Failed to load PDFs: ${err instanceof Error ? err.message : "Network error"}`,
+      );
     } finally {
       setPdfsLoading(false);
     }
   }, [clerkUserId, isConfigured, getToken, toast]);
 
   useEffect(() => {
-    fetchPdfs();
+    let isMounted = true;
+    if (isMounted) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      void fetchPdfs();
+    }
+    return () => {
+      isMounted = false;
+    };
   }, [fetchPdfs]);
+
+  const activePdfs = pdfs.filter((p) => p.active);
 
   // ── Save settings ─────────────────────────────────────────────────────────
   const handleSaveSettings = () => {
@@ -1038,7 +1266,10 @@ export const Chat = () => {
     localStorage.setItem("rag_ollama_model", ollamaModel);
     setShowSettings(false);
     const modelLabel = provider === "groq" ? groqModel : ollamaModel;
-    toast("success", `Connected to ${provider === "groq" ? "Groq" : "Ollama"} using ${modelLabel}`);
+    toast(
+      "success",
+      `Connected to ${provider === "groq" ? "Groq" : "Ollama"} using ${modelLabel}`,
+    );
     setMessages([
       {
         id: Date.now(),
@@ -1060,13 +1291,20 @@ export const Chat = () => {
     formData.append("file", file);
     try {
       const headers = await buildHeaders(getToken, clerkUserId);
-      const res = await fetch(`${FLASK_BASE}/upload`, { method: "POST", headers, body: formData });
+      const res = await fetch(`${FLASK_BASE}/upload`, {
+        method: "POST",
+        headers,
+        body: formData,
+      });
       const data = await res.json();
       if (res.ok && data.pdf) {
         setUploadState("success");
         setPdfs((prev) => [data.pdf, ...prev]);
         setShowPdfPanel(true);
-        toast("success", `"${data.pdf.originalFilename}" indexed — ${data.pdf.chunks} chunks ready`);
+        toast(
+          "success",
+          `"${data.pdf.originalFilename}" indexed — ${data.pdf.chunks} chunks ready`,
+        );
         setMessages((prev) => [
           ...prev,
           {
@@ -1090,13 +1328,21 @@ export const Chat = () => {
   const handleTogglePdf = async (pdfId: number) => {
     try {
       const headers = await buildHeaders(getToken, clerkUserId, true);
-      const res = await fetch(`${FLASK_BASE}/pdfs/${pdfId}/toggle`, { method: "PATCH", headers });
+      const res = await fetch(`${FLASK_BASE}/pdfs/${pdfId}/toggle`, {
+        method: "PATCH",
+        headers,
+      });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      setPdfs((prev) => prev.map((p) => (p.id === pdfId ? { ...p, active: data.active } : p)));
+      setPdfs((prev) =>
+        prev.map((p) => (p.id === pdfId ? { ...p, active: data.active } : p)),
+      );
       toast("info", data.active ? "PDF activated for RAG" : "PDF deactivated");
     } catch (err) {
-      toast("error", `Toggle failed: ${err instanceof Error ? err.message : "Network error"}`);
+      toast(
+        "error",
+        `Toggle failed: ${err instanceof Error ? err.message : "Network error"}`,
+      );
     }
   };
 
@@ -1105,12 +1351,18 @@ export const Chat = () => {
     const pdf = pdfs.find((p) => p.id === pdfId);
     try {
       const headers = await buildHeaders(getToken, clerkUserId);
-      const res = await fetch(`${FLASK_BASE}/pdfs/${pdfId}`, { method: "DELETE", headers });
+      const res = await fetch(`${FLASK_BASE}/pdfs/${pdfId}`, {
+        method: "DELETE",
+        headers,
+      });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setPdfs((prev) => prev.filter((p) => p.id !== pdfId));
       toast("success", `"${pdf?.originalFilename ?? "PDF"}" deleted`);
     } catch (err) {
-      toast("error", `Delete failed: ${err instanceof Error ? err.message : "Network error"}`);
+      toast(
+        "error",
+        `Delete failed: ${err instanceof Error ? err.message : "Network error"}`,
+      );
     }
   };
 
@@ -1123,15 +1375,27 @@ export const Chat = () => {
       setInputValue("");
       setIsLoading(true);
 
-      const userMsg: ChatMessage = { id: Date.now(), sender: "user", text: message };
+      const userMsg: ChatMessage = {
+        id: Date.now(),
+        sender: "user",
+        text: message,
+      };
       const botId = Date.now() + 1;
-      const placeholder: ChatMessage = { id: botId, sender: "bot", text: "", isStreaming: true };
+      const placeholder: ChatMessage = {
+        id: botId,
+        sender: "bot",
+        text: "",
+        isStreaming: true,
+      };
       setMessages((prev) => [...prev, userMsg, placeholder]);
 
       const history = messages
         .filter((m) => m.sender !== "system" && !m.isStreaming)
         .slice(-10)
-        .map((m) => ({ role: m.sender === "user" ? "user" : "assistant", content: m.text }));
+        .map((m) => ({
+          role: m.sender === "user" ? "user" : "assistant",
+          content: m.text,
+        }));
 
       const activePdfIds = pdfs.filter((p) => p.active).map((p) => p.id);
 
@@ -1162,7 +1426,16 @@ export const Chat = () => {
           const errMsg = data.message ?? `HTTP ${res.status}`;
           toast("error", errMsg);
           setMessages((prev) =>
-            prev.map((m) => (m.id === botId ? { ...m, text: `⚠️ ${errMsg}`, isStreaming: false, error: true } : m)),
+            prev.map((m) =>
+              m.id === botId
+                ? {
+                    ...m,
+                    text: `⚠️ ${errMsg}`,
+                    isStreaming: false,
+                    error: true,
+                  }
+                : m,
+            ),
           );
           return;
         }
@@ -1194,17 +1467,38 @@ export const Chat = () => {
               if ("chunksUsed" in evt) {
                 sources = evt.sources ?? [];
                 chunksUsed = evt.chunksUsed ?? 0;
-                setMessages((prev) => prev.map((m) => (m.id === botId ? { ...m, sources, chunksUsed } : m)));
+                setMessages((prev) =>
+                  prev.map((m) =>
+                    m.id === botId ? { ...m, sources, chunksUsed } : m,
+                  ),
+                );
               } else if ("text" in evt) {
-                setMessages((prev) => prev.map((m) => (m.id === botId ? { ...m, text: m.text + evt.text } : m)));
+                setMessages((prev) =>
+                  prev.map((m) =>
+                    m.id === botId ? { ...m, text: m.text + evt.text } : m,
+                  ),
+                );
               } else if ("reply" in evt) {
                 setMessages((prev) =>
-                  prev.map((m) => (m.id === botId ? { ...m, isStreaming: false, sources, chunksUsed } : m)),
+                  prev.map((m) =>
+                    m.id === botId
+                      ? { ...m, isStreaming: false, sources, chunksUsed }
+                      : m,
+                  ),
                 );
               } else if ("message" in evt) {
                 toast("error", evt.message);
                 setMessages((prev) =>
-                  prev.map((m) => (m.id === botId ? { ...m, text: `⚠️ ${evt.message}`, isStreaming: false, error: true } : m)),
+                  prev.map((m) =>
+                    m.id === botId
+                      ? {
+                          ...m,
+                          text: `⚠️ ${evt.message}`,
+                          isStreaming: false,
+                          error: true,
+                        }
+                      : m,
+                  ),
                 );
               }
             } catch {
@@ -1213,19 +1507,40 @@ export const Chat = () => {
           }
         }
 
-        setMessages((prev) => prev.map((m) => (m.id === botId && m.isStreaming ? { ...m, isStreaming: false } : m)));
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === botId && m.isStreaming ? { ...m, isStreaming: false } : m,
+          ),
+        );
       } catch (err) {
         if ((err as Error).name === "AbortError") return;
         const errMsg = "Network error — is backend running on port 5000?";
         toast("error", errMsg);
         setMessages((prev) =>
-          prev.map((m) => (m.id === botId ? { ...m, text: `⚠️ ${errMsg}`, isStreaming: false, error: true } : m)),
+          prev.map((m) =>
+            m.id === botId
+              ? { ...m, text: `⚠️ ${errMsg}`, isStreaming: false, error: true }
+              : m,
+          ),
         );
       } finally {
         setIsLoading(false);
       }
     },
-    [inputValue, isLoading, clerkUserId, messages, pdfs, provider, groqKey, groqModel, ollamaUrl, ollamaModel, getToken, toast],
+    [
+      inputValue,
+      isLoading,
+      clerkUserId,
+      messages,
+      pdfs,
+      provider,
+      groqKey,
+      groqModel,
+      ollamaUrl,
+      ollamaModel,
+      getToken,
+      toast,
+    ],
   );
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -1234,9 +1549,6 @@ export const Chat = () => {
       sendMessage();
     }
   };
-
-  const providerLabel = provider === "groq" ? `Groq · ${groqModel}` : `Ollama · ${ollamaModel}`;
-  const activePdfs = pdfs.filter((p) => p.active);
 
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 flex flex-col relative overflow-hidden">
@@ -1268,8 +1580,6 @@ export const Chat = () => {
       </AnimatePresence>
 
       <Container>
-
-
         {/* PDF Panel */}
         <AnimatePresence>
           {showPdfPanel && isConfigured && (
@@ -1281,13 +1591,22 @@ export const Chat = () => {
             >
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-                  <IconFileTypePdf size={16} className="text-emerald-500" /> PDF Resource Library
+                  <IconFileTypePdf size={16} className="text-emerald-500" /> PDF
+                  Resource Library
                 </h3>
-                <button onClick={() => setShowPdfPanel(false)} className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200">
+                <button
+                  onClick={() => setShowPdfPanel(false)}
+                  className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200"
+                >
                   <IconX size={15} />
                 </button>
               </div>
-              <PdfLibrary pdfs={pdfs} loading={pdfsLoading} onToggle={handleTogglePdf} onDelete={handleDeletePdf} />
+              <PdfLibrary
+                pdfs={pdfs}
+                loading={pdfsLoading}
+                onToggle={handleTogglePdf}
+                onDelete={handleDeletePdf}
+              />
             </motion.div>
           )}
         </AnimatePresence>
@@ -1305,7 +1624,10 @@ export const Chat = () => {
             <div className="space-y-4">
               {messages.map((msg, index) => {
                 const prevMsg = index > 0 ? messages[index - 1] : null;
-                const userQueryText = msg.sender === "bot" && prevMsg?.sender === "user" ? prevMsg.text : undefined;
+                const userQueryText =
+                  msg.sender === "bot" && prevMsg?.sender === "user"
+                    ? prevMsg.text
+                    : undefined;
                 return (
                   <MessageBubble
                     key={msg.id}
@@ -1376,10 +1698,10 @@ export const Chat = () => {
                       uploadState === "uploading"
                         ? "border-neutral-200 dark:border-neutral-800 text-neutral-300 cursor-not-allowed"
                         : uploadState === "success"
-                        ? "border-emerald-500/30 text-emerald-500 bg-emerald-500/10"
-                        : uploadState === "error"
-                        ? "border-red-500/30 text-red-500 bg-red-500/10"
-                        : "border-neutral-200/80 dark:border-neutral-800/80 text-neutral-400 hover:text-emerald-500 hover:border-emerald-500/40 bg-neutral-100/80 dark:bg-neutral-800/80"
+                          ? "border-emerald-500/30 text-emerald-500 bg-emerald-500/10"
+                          : uploadState === "error"
+                            ? "border-red-500/30 text-red-500 bg-red-500/10"
+                            : "border-neutral-200/80 dark:border-neutral-800/80 text-neutral-400 hover:text-emerald-500 hover:border-emerald-500/40 bg-neutral-100/80 dark:bg-neutral-800/80"
                     }`}
                   >
                     {uploadState === "uploading" ? (
@@ -1403,7 +1725,11 @@ export const Chat = () => {
                         : "bg-neutral-100 dark:bg-neutral-800 text-neutral-300 dark:text-neutral-600 cursor-not-allowed"
                     }`}
                   >
-                    {isLoading ? <IconLoader2 size={18} className="animate-spin" /> : <IconSend size={18} />}
+                    {isLoading ? (
+                      <IconLoader2 size={18} className="animate-spin" />
+                    ) : (
+                      <IconSend size={18} />
+                    )}
                   </motion.button>
                 </div>
               </div>
@@ -1411,8 +1737,8 @@ export const Chat = () => {
                 {provider === "ollama"
                   ? "🔒 Running locally — your data stays private"
                   : activePdfs.length > 0
-                  ? `Groq · Semantic RAG Vector Search across ${activePdfs.length} PDF${activePdfs.length !== 1 ? "s" : ""}`
-                  : "Groq · Universal Assistant · Upload PDF for RAG Search"}
+                    ? `Groq · Semantic RAG Vector Search across ${activePdfs.length} PDF${activePdfs.length !== 1 ? "s" : ""}`
+                    : "Groq · Universal Assistant · Upload PDF for RAG Search"}
               </p>
             </div>
           </div>

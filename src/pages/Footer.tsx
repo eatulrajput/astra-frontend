@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { SmoothNavLink } from "../components/SmoothNavLink";
-import { IconBrandGithub, IconPrompt, IconSettings} from "@tabler/icons-react";
+import { IconBrandGithub, IconPrompt, IconSettings } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
@@ -11,7 +11,6 @@ export const Footer = () => {
 
       <div className="relative mx-auto max-w-7xl px-6 py-20">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
-          
           {/* Brand */}
           <SmoothNavLink to="/">
             <motion.div
@@ -28,10 +27,17 @@ export const Footer = () => {
           {/* Links */}
           <div className="flex flex-col gap-3 text-sm text-slate-400">
             <p className="font-medium text-slate-200">Product</p>
-            <SmoothNavLink to="/features" className="hover:text-emerald-300 transition flex gap-2">
-              <IconSettings className="size-4"/> Features
+            <SmoothNavLink
+              to="/features"
+              className="hover:text-emerald-300 transition flex gap-2"
+            >
+              <IconSettings className="size-4" /> Features
             </SmoothNavLink>
-            <Link target="_blank" to="https://github.com/eatulrajput/astra-frontend" className="hover:text-emerald-300 transition flex gap-2">
+            <Link
+              target="_blank"
+              to="https://github.com/eatulrajput/astra-frontend"
+              className="hover:text-emerald-300 transition flex gap-2"
+            >
               <IconBrandGithub className="size-4" /> GitHub
             </Link>
           </div>
@@ -39,13 +45,22 @@ export const Footer = () => {
           {/* Meta */}
           <div className="flex flex-col gap-3 text-sm text-slate-400">
             <p className="font-medium text-slate-200">Company</p>
-            <SmoothNavLink to="/about" className="hover:text-emerald-300 transition">
+            <SmoothNavLink
+              to="/about"
+              className="hover:text-emerald-300 transition"
+            >
               About
             </SmoothNavLink>
-            <SmoothNavLink to="/privacy" className="hover:text-emerald-300 transition">
+            <SmoothNavLink
+              to="/privacy"
+              className="hover:text-emerald-300 transition"
+            >
               Privacy
             </SmoothNavLink>
-            <SmoothNavLink to="/terms" className="hover:text-emerald-300 transition">
+            <SmoothNavLink
+              to="/terms"
+              className="hover:text-emerald-300 transition"
+            >
               Terms
             </SmoothNavLink>
           </div>

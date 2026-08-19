@@ -20,7 +20,9 @@ export const Home = () => {
 
   const features = [
     {
-      icon: <IconBrain className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />,
+      icon: (
+        <IconBrain className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+      ),
       title: "Semantic Vector RAG Search",
       description:
         "High-density chunking and PostgreSQL pgvector semantic retrieval ensure exact context grounding for all your documents.",
@@ -32,13 +34,17 @@ export const Home = () => {
         "Switch seamlessly between lightning-fast Groq Cloud LLaMA 3.3 70B & DeepSeek R1 models or run 100% private local Ollama models.",
     },
     {
-      icon: <IconShieldLock className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />,
+      icon: (
+        <IconShieldLock className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+      ),
       title: "Automated Data Privacy & Redaction",
       description:
         "Strict PII and secret redaction engines scrub passwords, credit cards, and API keys before vector embedding.",
     },
     {
-      icon: <IconWorldWww className="w-6 h-6 text-cyan-600 dark:text-cyan-400" />,
+      icon: (
+        <IconWorldWww className="w-6 h-6 text-cyan-600 dark:text-cyan-400" />
+      ),
       title: "ScrapeGraphAI Web Knowledge Extraction",
       description:
         "Autonomous web scraping with legal robots.txt enforcement and structured JSON data extraction for real-time web intelligence.",
@@ -50,7 +56,8 @@ export const Home = () => {
       name: "Developer Starter",
       price: "$0",
       period: "forever free",
-      description: "Perfect for exploring semantic search & local Ollama models.",
+      description:
+        "Perfect for exploring semantic search & local Ollama models.",
       features: [
         "Groq LLaMA 3.3 & 3.1 models",
         "Local Ollama streaming",
@@ -81,7 +88,8 @@ export const Home = () => {
       name: "Enterprise Dedicated",
       price: "Custom",
       period: "billed annually",
-      description: "Isolated vector databases & dedicated infrastructure for teams.",
+      description:
+        "Isolated vector databases & dedicated infrastructure for teams.",
       features: [
         "Dedicated pgvector cluster",
         "Custom LLM fine-tuning & RAG pipelines",
@@ -128,7 +136,10 @@ export const Home = () => {
             transition={{ duration: 0.4 }}
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 text-xs font-semibold tracking-wide mb-8 shadow-inner"
           >
-            <IconSparkles size={14} className="animate-spin text-emerald-600 dark:text-emerald-400" />
+            <IconSparkles
+              size={14}
+              className="animate-spin text-emerald-600 dark:text-emerald-400"
+            />
             <span>Next-Gen Enterprise Knowledge Engine & RAG Platform</span>
           </motion.div>
 
@@ -152,7 +163,9 @@ export const Home = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-6 text-base sm:text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed font-medium"
           >
-            Upload PDFs, scrape web knowledge bases, and chat with pgvector semantic AI in real-time — powered by high-speed Groq Cloud LLaMA 3.3 & private local Ollama engines.
+            Upload PDFs, scrape web knowledge bases, and chat with pgvector
+            semantic AI in real-time — powered by high-speed Groq Cloud LLaMA
+            3.3 & private local Ollama engines.
           </motion.p>
 
           {/* CTAs */}
@@ -166,7 +179,8 @@ export const Home = () => {
               to="/chat"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm shadow-xl shadow-emerald-500/25 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
             >
-              <IconRocket size={18} /> Launch RAG Workspace <IconArrowRight size={16} />
+              <IconRocket size={18} /> Launch RAG Workspace{" "}
+              <IconArrowRight size={16} />
             </Link>
             <Link
               to="/dashboard"
@@ -184,20 +198,36 @@ export const Home = () => {
             className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-6 pt-10 border-t border-neutral-200/80 dark:border-neutral-900 max-w-3xl mx-auto text-center"
           >
             <div>
-              <p className="text-2xl font-bold text-neutral-900 dark:text-white font-mono">&lt; 50ms</p>
-              <p className="text-xs text-neutral-500 mt-1 font-semibold">Streaming Latency</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white font-mono">
+                &lt; 50ms
+              </p>
+              <p className="text-xs text-neutral-500 mt-1 font-semibold">
+                Streaming Latency
+              </p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 font-mono">99.8%</p>
-              <p className="text-xs text-neutral-500 mt-1 font-semibold">Retrieval Precision</p>
+              <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 font-mono">
+                99.8%
+              </p>
+              <p className="text-xs text-neutral-500 mt-1 font-semibold">
+                Retrieval Precision
+              </p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-teal-600 dark:text-teal-400 font-mono">pgvector</p>
-              <p className="text-xs text-neutral-500 mt-1 font-semibold">Semantic Embeddings</p>
+              <p className="text-2xl font-bold text-teal-600 dark:text-teal-400 font-mono">
+                pgvector
+              </p>
+              <p className="text-xs text-neutral-500 mt-1 font-semibold">
+                Semantic Embeddings
+              </p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-cyan-600 dark:text-cyan-400 font-mono">100% Private</p>
-              <p className="text-xs text-neutral-500 mt-1 font-semibold">Local Ollama Option</p>
+              <p className="text-2xl font-bold text-cyan-600 dark:text-cyan-400 font-mono">
+                100% Private
+              </p>
+              <p className="text-xs text-neutral-500 mt-1 font-semibold">
+                Local Ollama Option
+              </p>
             </div>
           </motion.div>
         </div>
@@ -207,9 +237,16 @@ export const Home = () => {
       <section className="py-24 border-b border-neutral-200/80 dark:border-neutral-900 bg-white/50 dark:bg-neutral-950/60">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-3">Enterprise Capabilities</h2>
-            <h3 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white tracking-tight">Built for Accuracy, Speed, and Compliance</h3>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-3 font-medium">Comprehensive vector RAG tooling engineered for high-performance AI document synthesis.</p>
+            <h2 className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-3">
+              Enterprise Capabilities
+            </h2>
+            <h3 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white tracking-tight">
+              Built for Accuracy, Speed, and Compliance
+            </h3>
+            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-3 font-medium">
+              Comprehensive vector RAG tooling engineered for high-performance
+              AI document synthesis.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -222,8 +259,12 @@ export const Home = () => {
                 <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 dark:bg-neutral-800/80 flex items-center justify-center mb-5 border border-emerald-500/20 dark:border-neutral-700/50">
                   {f.icon}
                 </div>
-                <h4 className="text-lg font-bold text-neutral-900 dark:text-white mb-2">{f.title}</h4>
-                <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed font-medium">{f.description}</p>
+                <h4 className="text-lg font-bold text-neutral-900 dark:text-white mb-2">
+                  {f.title}
+                </h4>
+                <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed font-medium">
+                  {f.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -234,9 +275,16 @@ export const Home = () => {
       <section className="py-24 border-b border-neutral-200/80 dark:border-neutral-900">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-3">Transparent Pricing</h2>
-            <h3 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white tracking-tight">Simple Plans for Developers & Enterprise Teams</h3>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-3 font-medium">Start free with your own API key or local models, then scale as your vector knowledge base grows.</p>
+            <h2 className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-3">
+              Transparent Pricing
+            </h2>
+            <h3 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white tracking-tight">
+              Simple Plans for Developers & Enterprise Teams
+            </h3>
+            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-3 font-medium">
+              Start free with your own API key or local models, then scale as
+              your vector knowledge base grows.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -257,18 +305,32 @@ export const Home = () => {
                 )}
 
                 <div>
-                  <h4 className="text-lg font-bold text-neutral-900 dark:text-white">{tier.name}</h4>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 min-h-[32px] font-medium">{tier.description}</p>
+                  <h4 className="text-lg font-bold text-neutral-900 dark:text-white">
+                    {tier.name}
+                  </h4>
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 min-h-[32px] font-medium">
+                    {tier.description}
+                  </p>
 
                   <div className="my-6 flex items-baseline gap-1">
-                    <span className="text-4xl font-bold text-neutral-900 dark:text-white font-mono">{tier.price}</span>
-                    <span className="text-xs text-neutral-500 dark:text-neutral-400 font-medium">/{tier.period}</span>
+                    <span className="text-4xl font-bold text-neutral-900 dark:text-white font-mono">
+                      {tier.price}
+                    </span>
+                    <span className="text-xs text-neutral-500 dark:text-neutral-400 font-medium">
+                      /{tier.period}
+                    </span>
                   </div>
 
                   <ul className="space-y-3 mb-8">
                     {tier.features.map((feat, fIdx) => (
-                      <li key={fIdx} className="flex items-center gap-2.5 text-xs text-neutral-700 dark:text-neutral-300 font-medium">
-                        <IconCheck size={14} className="text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+                      <li
+                        key={fIdx}
+                        className="flex items-center gap-2.5 text-xs text-neutral-700 dark:text-neutral-300 font-medium"
+                      >
+                        <IconCheck
+                          size={14}
+                          className="text-emerald-600 dark:text-emerald-400 flex-shrink-0"
+                        />
                         <span>{feat}</span>
                       </li>
                     ))}
@@ -295,8 +357,12 @@ export const Home = () => {
       <section className="py-24 border-b border-neutral-200/80 dark:border-neutral-900 bg-white/50 dark:bg-neutral-950/60">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-3">Frequently Asked Questions</h2>
-            <h3 className="text-3xl font-bold text-neutral-900 dark:text-white tracking-tight">Everything You Need to Know</h3>
+            <h2 className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-3">
+              Frequently Asked Questions
+            </h2>
+            <h3 className="text-3xl font-bold text-neutral-900 dark:text-white tracking-tight">
+              Everything You Need to Know
+            </h3>
           </div>
 
           <div className="space-y-4">
@@ -311,9 +377,15 @@ export const Home = () => {
                 >
                   <span>{faq.q}</span>
                   {openFaq === i ? (
-                    <IconChevronUp size={16} className="text-emerald-600 dark:text-emerald-400" />
+                    <IconChevronUp
+                      size={16}
+                      className="text-emerald-600 dark:text-emerald-400"
+                    />
                   ) : (
-                    <IconChevronDown size={16} className="text-neutral-400 dark:text-neutral-500" />
+                    <IconChevronDown
+                      size={16}
+                      className="text-neutral-400 dark:text-neutral-500"
+                    />
                   )}
                 </button>
                 {openFaq === i && (
@@ -335,7 +407,8 @@ export const Home = () => {
               Ready to Accelerate Your Document Intelligence?
             </h2>
             <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-3 max-w-xl mx-auto font-medium">
-              Start chatting with your PDFs and scraped web documents in seconds. No complex setup required.
+              Start chatting with your PDFs and scraped web documents in
+              seconds. No complex setup required.
             </p>
             <div className="mt-8 flex justify-center">
               <Link

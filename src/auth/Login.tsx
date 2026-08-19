@@ -26,8 +26,8 @@ export const Login = () => {
 
       // redirect after successful login
       window.location.href = "/chat";
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
       setLoading(false);
     }

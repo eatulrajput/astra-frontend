@@ -44,9 +44,19 @@ async function authHeaders(
 }
 
 // ─── Toast System ─────────────────────────────────────────────────────────────
-type Toast = { id: number; type: "success" | "error" | "info"; message: string };
+type Toast = {
+  id: number;
+  type: "success" | "error" | "info";
+  message: string;
+};
 
-function ToastContainer({ toasts, onDismiss }: { toasts: Toast[]; onDismiss: (id: number) => void }) {
+function ToastContainer({
+  toasts,
+  onDismiss,
+}: {
+  toasts: Toast[];
+  onDismiss: (id: number) => void;
+}) {
   if (!toasts.length) return null;
   return (
     <div className="fixed top-5 right-5 z-[100] flex flex-col gap-2.5 w-84 max-w-[calc(100vw-2.5rem)] pointer-events-none">
@@ -58,8 +68,8 @@ function ToastContainer({ toasts, onDismiss }: { toasts: Toast[]; onDismiss: (id
               t.type === "success"
                 ? "bg-emerald-950/80 border-emerald-800/80 text-emerald-200 shadow-emerald-950/40"
                 : t.type === "error"
-                ? "bg-red-950/80 border-red-800/80 text-red-200 shadow-red-950/40"
-                : "bg-neutral-900/90 border-neutral-800 text-neutral-200 shadow-neutral-950/40"
+                  ? "bg-red-950/80 border-red-800/80 text-red-200 shadow-red-950/40"
+                  : "bg-neutral-900/90 border-neutral-800 text-neutral-200 shadow-neutral-950/40"
             }`}
         >
           <div className="flex-shrink-0 mt-0.5 p-1 rounded-lg bg-white/10">
@@ -71,7 +81,9 @@ function ToastContainer({ toasts, onDismiss }: { toasts: Toast[]; onDismiss: (id
               <IconInfoCircle size={14} className="text-emerald-400" />
             )}
           </div>
-          <p className="flex-1 text-xs leading-relaxed font-normal">{t.message}</p>
+          <p className="flex-1 text-xs leading-relaxed font-normal">
+            {t.message}
+          </p>
           <button
             onClick={() => onDismiss(t.id)}
             className="flex-shrink-0 p-1 text-white/50 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
@@ -86,17 +98,35 @@ function ToastContainer({ toasts, onDismiss }: { toasts: Toast[]; onDismiss: (id
 
 function useToast() {
   const [toasts, setToasts] = useState<Toast[]>([]);
-  const add = useCallback((type: Toast["type"], message: string, duration = 4000) => {
-    const id = Date.now();
-    setToasts((prev) => [...prev, { id, type, message }]);
-    if (duration > 0) setTimeout(() => setToasts((prev) => prev.filter((t) => t.id !== id)), duration);
-  }, []);
-  const dismiss = useCallback((id: number) => setToasts((prev) => prev.filter((t) => t.id !== id)), []);
+  const add = useCallback(
+    (type: Toast["type"], message: string, duration = 4000) => {
+      const id = Date.now();
+      setToasts((prev) => [...prev, { id, type, message }]);
+      if (duration > 0)
+        setTimeout(
+          () => setToasts((prev) => prev.filter((t) => t.id !== id)),
+          duration,
+        );
+    },
+    [],
+  );
+  const dismiss = useCallback(
+    (id: number) => setToasts((prev) => prev.filter((t) => t.id !== id)),
+    [],
+  );
   return { toasts, toast: add, dismiss };
 }
 
 // ─── Pagination ───────────────────────────────────────────────────────────────
-function Pagination({ page, pages, onPage }: { page: number; pages: number; onPage: (p: number) => void }) {
+function Pagination({
+  page,
+  pages,
+  onPage,
+}: {
+  page: number;
+  pages: number;
+  onPage: (p: number) => void;
+}) {
   if (pages <= 1) return null;
   const prev = page > 1;
   const next = page < pages;
@@ -141,7 +171,7 @@ function Pagination({ page, pages, onPage }: { page: number; pages: number; onPa
             >
               {p}
             </button>
-          )
+          ),
         )}
       </div>
 
@@ -225,12 +255,14 @@ function Select({
   onChange: (v: string) => void;
   options: string[];
   placeholder?: string;
-  icon?: any;
+  icon?: React.ComponentType<{ size?: number; className?: string }>;
 }) {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider flex items-center gap-1">
-        {IconComponent && <IconComponent size={12} className="text-emerald-500" />}
+        {IconComponent && (
+          <IconComponent size={12} className="text-emerald-500" />
+        )}
         {label}
       </label>
       <div className="relative">
@@ -287,7 +319,12 @@ function UploadForm({
   const [errorMsg, setErrorMsg] = useState("");
 
   const canSubmit =
-    selectedFile && semester && subjectName && subjectCode && branch && (fileType === "notes" || year);
+    selectedFile &&
+    semester &&
+    subjectName &&
+    subjectCode &&
+    branch &&
+    (fileType === "notes" || year);
 
   const handleFile = (f: File) => {
     if (!f.name.toLowerCase().endsWith(".pdf")) {
@@ -364,7 +401,9 @@ function UploadForm({
             <IconUpload size={18} />
           </div>
           <div>
-            <h2 className="text-sm font-bold text-neutral-900 dark:text-white tracking-tight">Upload Resource</h2>
+            <h2 className="text-sm font-bold text-neutral-900 dark:text-white tracking-tight">
+              Upload Resource
+            </h2>
             <p className="text-[11px] text-neutral-500 dark:text-neutral-400">
               Upload PDF first, then fill out resource details below
             </p>
@@ -428,8 +467,8 @@ function UploadForm({
               dragging
                 ? "border-emerald-500 bg-emerald-500/10"
                 : selectedFile
-                ? "border-emerald-500/60 bg-emerald-500/5 dark:bg-emerald-500/10"
-                : "border-neutral-200 dark:border-neutral-800 hover:border-emerald-500/50 hover:bg-emerald-500/5 dark:hover:bg-emerald-500/5"
+                  ? "border-emerald-500/60 bg-emerald-500/5 dark:bg-emerald-500/10"
+                  : "border-neutral-200 dark:border-neutral-800 hover:border-emerald-500/50 hover:bg-emerald-500/5 dark:hover:bg-emerald-500/5"
             }`}
           >
             <input
@@ -452,7 +491,9 @@ function UploadForm({
                     <p className="text-sm font-bold text-neutral-900 dark:text-white truncate">
                       {selectedFile.name}
                     </p>
-                    <p className="text-xs text-neutral-500 font-mono mt-0.5">{formatBytes(selectedFile.size)}</p>
+                    <p className="text-xs text-neutral-500 font-mono mt-0.5">
+                      {formatBytes(selectedFile.size)}
+                    </p>
                   </div>
                 </div>
                 <button
@@ -473,9 +514,14 @@ function UploadForm({
                   <IconUpload size={24} />
                 </div>
                 <p className="text-sm font-bold text-neutral-800 dark:text-neutral-200">
-                  Click to select file or <span className="text-emerald-600 dark:text-emerald-400">drag PDF document here</span>
+                  Click to select file or{" "}
+                  <span className="text-emerald-600 dark:text-emerald-400">
+                    drag PDF document here
+                  </span>
                 </p>
-                <p className="text-xs text-neutral-400 mt-1">Accepts PDF documents up to 20 MB</p>
+                <p className="text-xs text-neutral-400 mt-1">
+                  Accepts PDF documents up to 20 MB
+                </p>
               </div>
             )}
           </div>
@@ -525,10 +571,28 @@ function UploadForm({
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <Select label="Semester" value={semester} onChange={setSemester} options={SEMESTERS} icon={IconBook} />
-            <Select label="Branch" value={branch} onChange={setBranch} options={BRANCHES} icon={IconSchool} />
+            <Select
+              label="Semester"
+              value={semester}
+              onChange={setSemester}
+              options={SEMESTERS}
+              icon={IconBook}
+            />
+            <Select
+              label="Branch"
+              value={branch}
+              onChange={setBranch}
+              options={BRANCHES}
+              icon={IconSchool}
+            />
             {fileType === "pyq" ? (
-              <Select label="Exam Year" value={year} onChange={setYear} options={YEARS} icon={IconCalendar} />
+              <Select
+                label="Exam Year"
+                value={year}
+                onChange={setYear}
+                options={YEARS}
+                icon={IconCalendar}
+              />
             ) : (
               <div>
                 <label className="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-1.5 block">
@@ -552,7 +616,9 @@ function UploadForm({
           {status === "success" && (
             <div className="flex items-center gap-2 text-xs text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/80 rounded-xl p-3">
               <IconCheck size={15} className="flex-shrink-0" />
-              <span>Resource successfully published to the batch repository!</span>
+              <span>
+                Resource successfully published to the batch repository!
+              </span>
             </div>
           )}
 
@@ -714,7 +780,8 @@ function FilterBar({
   setFilterType: (v: string) => void;
   onReset: () => void;
 }) {
-  const hasActiveFilters = search || filterSemester || filterBranch || filterType;
+  const hasActiveFilters =
+    search || filterSemester || filterBranch || filterType;
 
   return (
     <div className="flex flex-col gap-3">
@@ -828,11 +895,21 @@ function FilterBar({
 }
 
 // ─── EmptyState Component ─────────────────────────────────────────────────────
-function EmptyState({ hasFilters, onReset }: { hasFilters: boolean; onReset: () => void }) {
+function EmptyState({
+  hasFilters,
+  onReset,
+}: {
+  hasFilters: boolean;
+  onReset: () => void;
+}) {
   return (
     <div className="flex flex-col items-center justify-center py-16 px-4 text-center bg-white dark:bg-neutral-950 border border-neutral-200/80 dark:border-neutral-800/80 rounded-2xl">
       <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-3.5 text-emerald-600 dark:text-emerald-400">
-        {hasFilters ? <IconFolderOpen size={26} /> : <IconLayersIntersect size={26} />}
+        {hasFilters ? (
+          <IconFolderOpen size={26} />
+        ) : (
+          <IconLayersIntersect size={26} />
+        )}
       </div>
       <h3 className="text-sm font-bold text-neutral-900 dark:text-white mb-1">
         {hasFilters ? "No matching resources" : "No resources uploaded yet"}
@@ -863,7 +940,8 @@ export const Dashboard = () => {
 
   const firstName = user?.firstName ?? "Student";
   const clerkUserId = user?.id ?? "";
-  const uploaderName = [user?.firstName, user?.lastName].filter(Boolean).join(" ") || "Anonymous";
+  const uploaderName =
+    [user?.firstName, user?.lastName].filter(Boolean).join(" ") || "Anonymous";
   const uploaderEmail = user?.primaryEmailAddress?.emailAddress ?? "";
 
   const [files, setFiles] = useState<UploadedFile[]>([]);
@@ -898,16 +976,26 @@ export const Dashboard = () => {
         setTotalPages(data.pages ?? 1);
         setPage(data.page ?? p);
       } catch (err) {
-        toast("error", `Failed to load resources: ${err instanceof Error ? err.message : "Network error"}`);
+        toast(
+          "error",
+          `Failed to load resources: ${err instanceof Error ? err.message : "Network error"}`,
+        );
       } finally {
         setLoading(false);
       }
     },
-    [search, filterSemester, filterBranch, filterType, toast]
+    [search, filterSemester, filterBranch, filterType, toast],
   );
 
   useEffect(() => {
-    fetchFiles(1);
+    let isMounted = true;
+    if (isMounted) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      void fetchFiles(1);
+    }
+    return () => {
+      isMounted = false;
+    };
   }, [fetchFiles]);
 
   const handleUploadSuccess = useCallback(
@@ -915,7 +1003,7 @@ export const Dashboard = () => {
       toast("success", `"${file.name}" uploaded successfully`);
       fetchFiles(1);
     },
-    [fetchFiles, toast]
+    [fetchFiles, toast],
   );
 
   const resetFilters = () => {
@@ -943,7 +1031,8 @@ export const Dashboard = () => {
                 Welcome back, {firstName}
               </h1>
               <p className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mt-1 font-medium">
-                Access and contribute academic notes, study guides, and past examination papers.
+                Access and contribute academic notes, study guides, and past
+                examination papers.
               </p>
             </div>
 
@@ -954,7 +1043,9 @@ export const Dashboard = () => {
                   <IconBook size={18} />
                 </div>
                 <div>
-                  <p className="text-lg font-bold leading-none text-neutral-900 dark:text-white">{total}</p>
+                  <p className="text-lg font-bold leading-none text-neutral-900 dark:text-white">
+                    {total}
+                  </p>
                   <p className="text-[10px] text-neutral-400 font-semibold uppercase tracking-wider mt-0.5">
                     Resources
                   </p>
@@ -1012,8 +1103,13 @@ export const Dashboard = () => {
           {/* Content Files Grid */}
           {loading ? (
             <div className="flex flex-col items-center justify-center py-20 bg-white dark:bg-neutral-950 border border-neutral-200/80 dark:border-neutral-800/80 rounded-2xl">
-              <IconLoader2 size={30} className="animate-spin text-emerald-500 mb-2" />
-              <p className="text-xs text-neutral-400 font-medium">Loading learning repository...</p>
+              <IconLoader2
+                size={30}
+                className="animate-spin text-emerald-500 mb-2"
+              />
+              <p className="text-xs text-neutral-400 font-medium">
+                Loading learning repository...
+              </p>
             </div>
           ) : files.length === 0 ? (
             <EmptyState hasFilters={hasFilters} onReset={resetFilters} />
@@ -1024,7 +1120,11 @@ export const Dashboard = () => {
                   <FileCard key={file.id} file={file} />
                 ))}
               </div>
-              <Pagination page={page} pages={totalPages} onPage={(p) => fetchFiles(p)} />
+              <Pagination
+                page={page}
+                pages={totalPages}
+                onPage={(p) => fetchFiles(p)}
+              />
             </>
           )}
         </div>

@@ -1,11 +1,11 @@
-import React from "react"
+import React from "react";
 
 interface dataProp {
-title:string
-content:React.ReactNode
+  title: string;
+  content: React.ReactNode;
 }
 
-export const changelogData:dataProp[] = [
+export const changelogData: dataProp[] = [
   {
     title: "2026",
     content: (

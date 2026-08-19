@@ -24,14 +24,14 @@ export const Cover = ({
       setContainerWidth(ref.current?.clientWidth ?? 0);
 
       const height = ref.current?.clientHeight ?? 0;
-      const numberOfBeams = Math.floor(height / 10); // Adjust the divisor to control the spacing
+      const numberOfBeams = Math.floor(height / 10);
       const positions = Array.from(
         { length: numberOfBeams },
-        (_, i) => (i + 1) * (height / (numberOfBeams + 1))
+        (_, i) => (i + 1) * (height / (numberOfBeams + 1)),
       );
       setBeamPositions(positions);
     }
-  }, [ref.current]);
+  }, []);
 
   return (
     <div
@@ -90,8 +90,8 @@ export const Cover = ({
         <Beam
           key={index}
           hovered={hovered}
-          duration={Math.random() * 2 + 1}
-          delay={Math.random() * 2 + 1}
+          duration={((index * 0.7) % 2) + 1}
+          delay={((index * 0.5) % 2) + 1}
           width={containerWidth}
           style={{
             top: `${position}px`,
@@ -132,7 +132,7 @@ export const Cover = ({
         }}
         className={cn(
           "dark:text-emerald-300 inline-block text-neutral-900 relative z-20 group-hover/cover:text-white transition duration-200",
-          className
+          className,
         )}
       >
         {children}
@@ -194,11 +194,11 @@ export const Beam = ({
             y2: 0,
           }}
           transition={{
-            duration: hovered ? 0.5 : duration ?? 2,
+            duration: hovered ? 0.5 : (duration ?? 2),
             ease: "linear",
             repeat: Infinity,
-            delay: hovered ? Math.random() * (1 - 0.2) + 0.2 : 0,
-            repeatDelay: hovered ? Math.random() * (2 - 1) + 1 : delay ?? 1,
+            delay: hovered ? 0.3 : 0,
+            repeatDelay: delay ?? 1,
           }}
         >
           <stop stopColor="#D8E5FA" stopOpacity="0" />
@@ -220,7 +220,7 @@ export const CircleIcon = ({
     <div
       className={cn(
         `pointer-events-none animate-pulse group-hover/cover:hidden group-hover/cover:opacity-100 group h-2 w-2 rounded-full bg-emerald-300 dark:bg-teal-300 opacity-20 group-hover/cover:bg-white`,
-        className
+        className,
       )}
     ></div>
   );

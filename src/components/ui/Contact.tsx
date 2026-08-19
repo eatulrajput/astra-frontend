@@ -5,8 +5,6 @@ import { AnimatedTooltip, LampContainer } from "@/components/ui";
 import { toast } from "sonner";
 import { TeamData } from "@/data/TeamData";
 
-
-
 type FormState = {
   name: string;
   email: string;
@@ -61,7 +59,7 @@ export const Contact = () => {
 
   return (
     <div>
-{/* Contact Heading */}
+      {/* Contact Heading */}
       <LampContainer>
         <motion.h1
           initial={{ opacity: 0.5, y: 100 }}
@@ -131,7 +129,6 @@ export const Contact = () => {
               {loading ? "Sending..." : "Send Message"}
             </button>
           </form>
-
         </div>
 
         <div className="min-h-screen">

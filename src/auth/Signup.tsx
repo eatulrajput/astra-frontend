@@ -34,8 +34,8 @@ export const Signup = () => {
 
       // ✅ redirect after successful signup
       window.location.href = "/login";
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
       setLoading(false);
     }
@@ -44,7 +44,6 @@ export const Signup = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-black/99">
       <Container className="relative min-h-full overflow-hidden bg-cover bg-center dark:bg-slate-950">
-        
         {/* Background */}
         <div className="from emerald-300 absolute inset-0 scale-105 bg-linear-to-b to-emerald-300/10 bg-cover bg-center blur-sm dark:to-slate-950"></div>
 

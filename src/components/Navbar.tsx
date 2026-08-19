@@ -1,4 +1,9 @@
-import { IconPrompt, IconMenu2, IconX, IconSparkles } from "@tabler/icons-react";
+import {
+  IconPrompt,
+  IconMenu2,
+  IconX,
+  IconSparkles,
+} from "@tabler/icons-react";
 import { SmoothNavLink } from "./SmoothNavLink";
 import ThemeToggleButton from "./ThemeToggleButton";
 import { useState } from "react";
@@ -23,7 +28,11 @@ export default function Navbar() {
 
             {/* SaaS Platform Badge */}
             <span className="hidden sm:inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase ring-1 ring-emerald-500/30">
-              <IconSparkles size={11} className="text-emerald-500 dark:text-emerald-400" /> SaaS Pro
+              <IconSparkles
+                size={11}
+                className="text-emerald-500 dark:text-emerald-400"
+              />{" "}
+              SaaS Pro
             </span>
           </div>
         </SmoothNavLink>
@@ -64,7 +73,9 @@ export default function Navbar() {
           <SmoothNavLink
             className={({ isActive }) =>
               `transition-colors duration-200 hover:text-emerald-600 dark:hover:text-emerald-400 ${
-                isActive ? "text-emerald-600 dark:text-emerald-400 font-bold" : "text-neutral-600 dark:text-neutral-300"
+                isActive
+                  ? "text-emerald-600 dark:text-emerald-400 font-bold"
+                  : "text-neutral-600 dark:text-neutral-300"
               }`
             }
             to="/"
@@ -76,7 +87,9 @@ export default function Navbar() {
             <SmoothNavLink
               className={({ isActive }) =>
                 `transition-colors duration-200 hover:text-emerald-600 dark:hover:text-emerald-400 ${
-                  isActive ? "text-emerald-600 dark:text-emerald-400 font-bold" : "text-neutral-600 dark:text-neutral-300"
+                  isActive
+                    ? "text-emerald-600 dark:text-emerald-400 font-bold"
+                    : "text-neutral-600 dark:text-neutral-300"
                 }`
               }
               to="/chat"
@@ -87,7 +100,9 @@ export default function Navbar() {
             <SmoothNavLink
               className={({ isActive }) =>
                 `transition-colors duration-200 hover:text-emerald-600 dark:hover:text-emerald-400 ${
-                  isActive ? "text-emerald-600 dark:text-emerald-400 font-bold" : "text-neutral-600 dark:text-neutral-300"
+                  isActive
+                    ? "text-emerald-600 dark:text-emerald-400 font-bold"
+                    : "text-neutral-600 dark:text-neutral-300"
                 }`
               }
               to="/dashboard"
@@ -98,7 +113,9 @@ export default function Navbar() {
             <SmoothNavLink
               className={({ isActive }) =>
                 `transition-colors duration-200 hover:text-emerald-600 dark:hover:text-emerald-400 ${
-                  isActive ? "text-emerald-600 dark:text-emerald-400 font-bold" : "text-neutral-600 dark:text-neutral-300"
+                  isActive
+                    ? "text-emerald-600 dark:text-emerald-400 font-bold"
+                    : "text-neutral-600 dark:text-neutral-300"
                 }`
               }
               to="/scraper"
@@ -161,13 +178,19 @@ export default function Navbar() {
               <div className="flex items-center gap-3 pt-3 border-t border-neutral-200 dark:border-neutral-800">
                 <Show when={"signed-out"}>
                   <SignInButton mode="modal">
-                    <button onClick={() => setOpen(false)} className="rounded-xl border border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 px-4 py-2 text-neutral-800 dark:text-neutral-200">
+                    <button
+                      onClick={() => setOpen(false)}
+                      className="rounded-xl border border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 px-4 py-2 text-neutral-800 dark:text-neutral-200"
+                    >
                       Sign In
                     </button>
                   </SignInButton>
 
                   <SignUpButton mode="modal">
-                    <button onClick={() => setOpen(false)} className="rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 px-4 py-2 text-white font-bold">
+                    <button
+                      onClick={() => setOpen(false)}
+                      className="rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 px-4 py-2 text-white font-bold"
+                    >
                       Get Started
                     </button>
                   </SignUpButton>

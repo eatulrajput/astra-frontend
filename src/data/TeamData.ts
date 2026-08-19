@@ -1,11 +1,11 @@
-interface TeamDataProps{
-    id:number
-    name: string
-    designation: string
-    image: string
+interface TeamDataProps {
+  id: number;
+  name: string;
+  designation: string;
+  image: string;
 }
 
-export const TeamData : TeamDataProps[] = [
+export const TeamData: TeamDataProps[] = [
   {
     id: 1,
     name: "Aritra Banerjee",

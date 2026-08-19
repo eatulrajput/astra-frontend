@@ -1,11 +1,11 @@
-interface testimonialProps{
-    quote:string
-    name:string
-    designation:string
-    src:string
+interface testimonialProps {
+  quote: string;
+  name: string;
+  designation: string;
+  src: string;
 }
 
-export const testimonialsData:testimonialProps[] = [
+export const testimonialsData: testimonialProps[] = [
   {
     quote: "It is big contribution back to our College",
     name: "Aritra",
